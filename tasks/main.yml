@@ -6,3 +6,6 @@
 
 - name: Connect to Azure and create basic objects
   ansible.builtin.include_tasks: az_basic.yml
+
+- name: Create basic Network infrastructure
+  ansible.builtin.include_tasks: az_network.yml
