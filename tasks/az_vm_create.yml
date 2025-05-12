@@ -1,46 +1,45 @@
 ---
-- name: Create and configure Azure Load Balancer
+- name: Create Azure VMs and NICs then configure NICs for Load Balance
   hosts: localhost
   connection: local
   tasks:
 
-  - name: Create public IP for Load Balancer
-    azure.azcollection.azure_rm_publicipaddress:
+  # Create VMs
+  - name: Create and configure NICs for VMs
+    azure.azcollection.azure_rm_networkinterface:
       resource_group: "{{ resource_group }}"
-      name: "{{ lb_pip_name }}"
-      allocation_method: Static
-      sku: Standard
-      location: "{{ location }}"
-    register: public_ip
-      
-  - name: Create Load Balancer
-    azure.azcollection.azure_rm_loadbalancer:
+      name: "vm{{ item }}-nic"
+      virtual_network: "{{ vnet_name }}"
+      subnet: "{{ backend_subnet_name }}"
+      security_group: "{{ backend_nsg_name }}"
+      ip_configurations:
+        - name: "ipconfig{{ item }}"
+          primary: yes
+          load_balancer_backend_address_pools:
+            - name: "backend-pool"
+              loadbalancer: "{{ lb_name }}"
+    loop: "{{ range(1, vm_count + 1)|list }}"
+    register: nics
+
+  - name: Create virtual machine
+    azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
-      name: "{{ lb_name }}"
+      name: "web-vm{{ item }}"
       location: "{{ location }}"
-      sku: Standard
-      frontend_ip_configurations:
-        - name: "frontend-config"
-          public_ip_address: "{{ lb_pip_name }}"
-      backend_address_pools:
-        - name: "backend-pool"
-      probes:
-        - name: "https-probe"
-          protocol: Tcp
-          port: 443
-          interval: 5
-          fail_count: 2
-      load_balancing_rules:
-        - name: "https-rule"
-          frontend_ip_configuration: "frontend-config"
-          backend_address_pool: "backend-pool"
-          protocol: Tcp
-          frontend_port: 443
-          backend_port: 443
-          idle_timeout: 4
-          probe: "https-probe"
-          load_distribution: Default
-    register: load_balancer
+      vm_size: "{{ vm_size }}"
+      managed_disk_type: "{{ storage_account_type }}"
+      os_disk_size_gb: "{{ disk_size }}"
+      storage_account: "{{ storage_account }}"
+      storage_container: vm{{ item }}container
+      storage_blob: vm{{ item }}blob.vhd
+      admin_username: {{ admin_username }}
+      admin_password: {{ admin_password }}
+      network_interfaces: "vm{{ item }}-nic"
+      image:
+        offer: ubuntu-24_04-lts
+        publisher: Canonical
+        sku: 'ubuntu-pro'
+        version: latest
  
   - name: Successful Object creation
     ansible.builtin.set_fact:
