@@ -14,7 +14,8 @@ backend_subnet_name: "backend-subnet"
 backend_subnet_prefix: "10.10.2.0/24"
 mgmt_subnet_name: "mgmt-subnet"
 mgmt_subnet_prefix: "10.10.3.0/24"
-app_nsg_name: "app-nsg"
+frontend_nsg_name: "frontend-nsg"
+backend_nsg_name: "backend-nsg"
 mgmt_nsg_name: "mgmt-nsg"
 
 # VM Configuration
