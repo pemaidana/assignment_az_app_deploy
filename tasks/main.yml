@@ -1,19 +1,8 @@
 ---
 - name: Initialize variables
   ansible.builtin.set_fact:
-    exec_success: false
-    exec_changed: false
     exec_rc: 1
     exec_message: "The initial status didn't change during the execution of the playbook"
-    exec_automation: "ansible_role_nw_zscaler_swap_file_memory"
 
-- name: Set effected host
-  ansible.builtin.set_fact:
-    hostname: "{{ hostname }}"
-
-- name: Set Server type
-  ansible.builtin.set_fact:
-    server_type: "{{ server_type }}"
-
-- name: Connect to the zscaler
-  ansible.builtin.include_tasks: connect_zscaler.yml
+- name: Connect to the Azure and perform first actions
+  ansible.builtin.include_tasks: az_basic.yml
