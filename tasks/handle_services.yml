@@ -1,0 +1,23 @@
+---
+- name: Check the services status
+  delegate_to: "{{ jump_host }}"
+  block:
+    - name: Linux based server
+      when: "'ZPA' in server_type"
+      ansible.builtin.include_tasks: zpa_lss_server.yml
+
+    - name: LSS server type
+      when: "'LSS' in server_type"
+      ansible.builtin.include_tasks: zpa_lss_server.yml
+
+    - name: VSE server type
+      when: "'VSE' in server_type"
+      ansible.builtin.include_tasks: vse_vzen_server.yml
+
+    - name: PSE server type
+      when: "'PSE' in server_type"
+      ansible.builtin.include_tasks: pse_server.yml
+
+    - name: NSS server type
+      when: "'NSS' in server_type"
+      ansible.builtin.include_tasks: nss_server.yml

@@ -1,0 +1,5 @@
+---
+jump_host: "starbuck.dow.com"
+zscaler_user: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+zscaler_passwd: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+ansible_python_interpreter: /usr/bin/python3

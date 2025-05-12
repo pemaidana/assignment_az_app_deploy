@@ -1,0 +1,96 @@
+---
+- name: Playbook initialization
+  delegate_to: "{{ jump_host }}"
+  block:
+    - name: Connect to zscaler
+      connection_zscaler:
+        host: "{{ hostname }}"
+        username: "{{ zscaler_user }}"
+        password: "{{ zscaler_passwd }}"
+        device_type: "linux"
+        commands:
+          - "uname -a"
+      register: type_os
+
+    - name: Filter the uname
+      ansible.builtin.set_fact:
+        uname: '{{ type_os.stdout | regex_search("Linux|ZscalerOS") }}'
+
+    - name: When the operating system is "Zscaler OS"
+      when: uname == "ZscalerOS"
+      block:
+        - name: Login to Zscaler and run the top command
+          connection_zscaler:
+            host: "{{ hostname }}"
+            username: "{{ zscaler_user }}"
+            password: "{{ zscaler_passwd }}"
+            device_type: "linux"
+            commands:
+              - "swapinfo -h"
+          register: swapinfo_zscaler_os
+
+        - name: Filter the swap memory
+          ansible.builtin.set_fact:
+            swap_zscaler_percentage: '{{ swapinfo_zscaler_os.stdout | regex_search("(\d+)%", "\1") }}'
+
+        - name: Close the ticket if the swap has lowe value than the threshold value
+          when: (swap_zscaler_percentage | float) <= 45
+          ansible.builtin.set_fact:
+            exec_success: true
+            exec_changed: true
+            exec_rc: 0
+            exec_message: “Zscaler Swap file level is now below threshold. Closing Alert”
+
+        - name: Include the task to handle the services
+          ansible.builtin.include_tasks: handle_services.yml
+          when: (swap_zscaler_percentage | float) > 45
+
+      rescue:
+        - name: Not able to login to zscaler
+          ansible.builtin.set_fact:
+            exec_success: true
+            exec_changed: false
+            exec_rc: 2
+            exec_message: “It was found an issue while connecting to Zscaler server”
+
+    - name: When the operating system is "Linux zpa-connector"
+      when: uname == "Linux"
+      block:
+        - name: Login to Zscaler and run the top command
+          connection_zscaler:
+            host: "{{ hostname }}"
+            username: "{{ zscaler_user }}"
+            password: "{{ zscaler_passwd }}"
+            device_type: "linux"
+            commands:
+              - "top"
+          register: top_zpa_connector_os
+
+        - name: Filter the swap memory
+          ansible.builtin.set_fact:
+            swap_zpa_connector_total: '{{ top_zpa_connector_os.stdout | regex_search("MiB Swap:.\s+(\S+)\s.total,.\s+(\S+) .free,.\s+(\S+) .used", "\1") }}' # noqa: yaml[line-length]
+            swap_zpa_connector_used: '{{ top_zpa_connector_os.stdout | regex_search("MiB Swap:.\s+(\S+)\s.total,.\s+(\S+) .free,.\s+(\S+) .used", "\3") }}'  # noqa: yaml[line-length]
+
+        - name: Calculate the swap percentage
+          ansible.builtin.set_fact:
+            swap_percentage: "{{ (swap_zpa_connector_used[0] | float / swap_zpa_connector_total[0] | float) * 100 if swap_zpa_connector_total[0] | float > 0 else 0 }}" # noqa: yaml[line-length]
+
+        - name: Close the ticket if the swap has lowe value than the threshold value
+          when: (swap_percentage | float) <= 45
+          ansible.builtin.set_fact:
+            exec_success: true
+            exec_changed: false
+            exec_rc: 0
+            exec_message: “Zscaler Swap file level is now below threshold. Closing Alert”
+
+        - name: Include the task to handle the services
+          ansible.builtin.include_tasks: handle_services.yml
+          when: (swap_percentage | float) > 45
+
+      rescue:
+        - name: Not able to login to zscaler
+          ansible.builtin.set_fact:
+            exec_success: true
+            exec_changed: false
+            exec_rc: 2
+            exec_message: “It was found an issue while connecting to Zscaler server”
