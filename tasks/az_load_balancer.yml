@@ -1,91 +1,48 @@
 ---
-- name: Login to NSS server
-  delegate_to: "{{ jump_host }}"
-  block:
-    - name: Check the activity of nss server
-      connection_zscaler:
-        host: "{{ hostname }}"
-        username: "{{ zscaler_user }}"
-        password: "{{ zscaler_passwd }}"
-        device_type: "linux"
-        commands:
-          - "sudo nss status"
-      register: status_command_output
+- name: Create and configure Azure Load Balancer
+  hosts: localhost
+  connection: local
+  tasks:
 
-    - name: Transfer the ticket if the nss status is not running
-      when: "'service not running' in status_command_output.stdout"
-      ansible.builtin.set_fact:
-        exec_success: true
-        exec_changed: false
-        exec_rc: 2
-        exec_message: “nss status is not active”
-
-    - name: If the activity status is active, stop the service and reboot it
-      when: "'service running' in status_command_output.stdout"
-      block:
-        - name: Reboot the service and again check the status
-          connection_zscaler:
-            host: "{{ hostname }}"
-            username: "{{ zscaler_user }}"
-            password: "{{ zscaler_passwd }}"
-            device_type: "linux"
-            commands:
-              - "sudo nss stop"
-              - "sudo reboot"
-          register: reboot
-
-        - name: Wait for sometime
-          ansible.builtin.pause:
-            seconds: 100
-
-        - name: After Reboot start the service and again check the status
-          connection_zscaler:
-            host: "{{ hostname }}"
-            username: "{{ zscaler_user }}"
-            password: "{{ zscaler_passwd }}"
-            device_type: "linux"
-            commands:
-              - "sudo nss start"
-          register: nss_restart
-
-        - name: Wait for sometime after restarting the vzen service
-          ansible.builtin.pause:
-            seconds: 300
-
-        - name: Check the activity of nss
-          connection_zscaler:
-            host: "{{ hostname }}"
-            username: "{{ zscaler_user }}"
-            password: "{{ zscaler_passwd }}"
-            device_type: "linux"
-            commands:
-              - "sudo nss status"
-          register: status_command_output_new
-
-        - name: Transfer the ticket if the status is not up
-          when: "'service not running' in status_command_output_new.stdout"
-          ansible.builtin.set_fact:
-            exec_success: true
-            exec_changed: false
-            exec_rc: 2
-            exec_message: “nss status is not up after rebooting, please check manually”
-
-        - name: Now check the swap file level again
-          ansible.builtin.include_tasks: connect_zscaler.yml
-          when: "'service running' in status_command_output_new.stdout"
-
-      rescue:
-        - name: Service status is not active
-          ansible.builtin.set_fact:
-            exec_success: true
-            exec_changed: false
-            exec_rc: 2
-            exec_message: “There is some issues while rebooting or again connecting to zscaler”
-
-  rescue:
-    - name: Login to Server is not successful
-      ansible.builtin.set_fact:
-        exec_success: true
-        exec_changed: false
-        exec_rc: 2
-        exec_message: “There is some issues while connecting to server or commands on server might fail, please check manually”
+  - name: Create public IP for Load Balancer
+    azure.azcollection.azure_rm_publicipaddress:
+      resource_group: "{{ resource_group }}"
+      name: "{{ lb_public_ip_name }}"
+      allocation_method: Static
+      sku: Standard
+      location: "{{ location }}"
+    register: public_ip
+      
+  - name: Create Load Balancer
+    azure.azcollection.azure_rm_loadbalancer:
+      resource_group: "{{ resource_group }}"
+      name: "{{ lb_name }}"
+      location: "{{ location }}"
+      sku: Standard
+      frontend_ip_configurations:
+        - name: "frontend-config"
+          public_ip_address: "{{ lb_public_ip_name }}"
+      backend_address_pools:
+        - name: "backend-pool"
+      probes:
+        - name: "https-probe"
+          protocol: Tcp
+          port: 443
+          interval: 5
+          fail_count: 2
+      load_balancing_rules:
+        - name: "https-rule"
+          frontend_ip_configuration: "frontend-config"
+          backend_address_pool: "backend-pool"
+          protocol: Tcp
+          frontend_port: 443
+          backend_port: 443
+          idle_timeout: 4
+          probe: "https-probe"
+          load_distribution: Default
+    register: load_balancer
+ 
+  - name: Successful Object creation
+    ansible.builtin.set_fact:
+      exec_rc: 0
+      exec_message: “Azure Load Balancer and its components were configured with success”
