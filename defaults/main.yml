@@ -23,8 +23,7 @@ vm_size: "Standard_B1s"
 disk_size: "128"
 admin_username: "testonly"
 admin_password: "Password123123"
-storage_account: 
-storage_container: testvm001pedro
+storage_container: "testv"
 
 
 # VM Configuration
