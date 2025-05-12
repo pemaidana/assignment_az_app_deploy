@@ -19,7 +19,7 @@ backend_nsg_name: "backend-nsg"
 mgmt_nsg_name: "mgmt-nsg"
 
 # APP VM Configuration
-vm_count = 0
+vm_count: 0
 vm_size: "Standard_B1s"
 disk_size: "128"
 admin_username: "testonly"
