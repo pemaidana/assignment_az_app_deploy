@@ -4,5 +4,5 @@
     exec_rc: 1
     exec_message: "The initial status didn't change during the execution of the playbook"
 
-- name: Connect to the Azure and perform first actions
+- name: Connect to Azure and create basic objects
   ansible.builtin.include_tasks: az_basic.yml
