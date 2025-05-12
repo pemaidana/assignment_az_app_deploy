@@ -4,52 +4,74 @@
   connection: local
   tasks:
 
-  - name: Set some facts
-    ansible.builtin.set_fact:
-      vm_count: 0
-
   - name: Create and configure NICs for VMs
     azure.azcollection.azure_rm_networkinterface:
       resource_group: "{{ resource_group }}"
-      name: "vm{{ item }}-nic"
+      name: "vm-01-nic"
       virtual_network: "{{ vnet_name }}"
       subnet: "{{ backend_subnet_name }}"
       security_group: "{{ backend_nsg_name }}"
       ip_configurations:
-        - name: "ipconfig{{ item }}"
-          primary: yes
+        - name: "ipconfig-vm-01"
+          primary: true
           load_balancer_backend_address_pools:
             - name: "backend-pool"
-              loadbalancer: "{{ lb_name }}"
-    loop: "{{ range(1, vm_count + 1)|list }}"
+              load_balancer: "{{ lb_name }}"
     register: nics
 
-  - name: Set some facts
-    ansible.builtin.set_fact:
-      vm_count: 0
+  - name: Create and configure NICs for VMs
+    azure.azcollection.azure_rm_networkinterface:
+      resource_group: "{{ resource_group }}"
+      name: "vm-02-nic"
+      virtual_network: "{{ vnet_name }}"
+      subnet: "{{ backend_subnet_name }}"
+      #security_group: "{{ backend_nsg_name }}"
+      ip_configurations:
+        - name: "ipconfig-vm-02"
+          primary: true
+          load_balancer_backend_address_pools:
+            - name: "backend-pool"
+              load_balancer: "{{ lb_name }}"
+      security_group: "{{ backend_nsg_name }}"
+    register: nics
 
   - name: Create virtual machine
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
-      name: "web-vm{{ item }}"
+      name: "web-vm-01"
       location: "{{ location }}"
       vm_size: "{{ vm_size }}"
       managed_disk_type: "{{ storage_account_type }}"
       os_disk_size_gb: "{{ disk_size }}"
       storage_account: "{{ storage_account }}"
-      storage_container: vm{{ item }}container
-      storage_blob: vm{{ item }}blob.vhd
-      admin_username: {{ admin_username }}
-      admin_password: {{ admin_password }}
-      network_interfaces: "vm{{ item }}-nic"
+      storage_container: "vm-01-container"
+      storage_blob: "vm-01-blob.vhd"
+      admin_username: "{{ admin_username }}"
+      admin_password: "{{ admin_password }}"
+      network_interfaces: "vm-01-nic"
       image:
         offer: ubuntu-24_04-lts
         publisher: Canonical
         sku: 'ubuntu-pro'
         version: latest
-    loop: "{{ range(1, vm_count + 1)|list }}"
- 
-  - name: Successful Object creation
-    ansible.builtin.set_fact:
-      exec_rc: 0
-      exec_message: “Azure VMs and NICs were created and configured with success”
+
+  - name: Create virtual machine
+    azure_rm_virtualmachine:
+      resource_group: "{{ resource_group }}"
+      name: "web-vm-02"
+      location: "{{ location }}"
+      vm_size: "{{ vm_size }}"
+      managed_disk_type: "{{ storage_account_type }}"
+      os_disk_size_gb: "{{ disk_size }}"
+      storage_account: "{{ storage_account }}"
+      storage_container: "vm-02-container"
+      storage_blob: "vm-02-blob.vhd"
+      admin_username: "{{ admin_username }}"
+      admin_password: "{{ admin_password }}"
+      network_interfaces: "vm-02-nic"
+      image:
+        offer: ubuntu-24_04-lts
+        publisher: Canonical
+        sku: 'ubuntu-pro'
+        version: latest
+        
