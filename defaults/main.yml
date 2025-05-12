@@ -2,11 +2,7 @@
 # Azure Resource Configuration
 resource_group: "nginx-app-rg"
 location: "eastus"
-storage_account: "sto_account_dev"
-#admin_username: "azureuser"
-#admin_ssh_key: "ssh-rsa YOUR_SSH_PUBLIC_KEY"  # Replace with your SSH public key
-#admin_ip_address: "YOUR_IP_ADDRESS/32"  # Replace with your IP address for SSH access
-#ssh_private_key_path: "~/.ssh/id_rsa"  # Path to SSH private key on your control machine
+storage_account: "stoaccountdev"
 
 # Network Configuration
 vnet_name: "az-deploy-vnet"
