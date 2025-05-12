@@ -1,1 +1,1 @@
-# assignment_az_app_deploy
+# Azure Stateless Application Deployment automated with Ansible
