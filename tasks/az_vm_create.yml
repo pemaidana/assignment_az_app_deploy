@@ -4,7 +4,6 @@
   connection: local
   tasks:
 
-  # Create VMs
   - name: Create and configure NICs for VMs
     azure.azcollection.azure_rm_networkinterface:
       resource_group: "{{ resource_group }}"
@@ -40,6 +39,7 @@
         publisher: Canonical
         sku: 'ubuntu-pro'
         version: latest
+    loop: "{{ range(1, vm_count + 1)|list }}"
  
   - name: Successful Object creation
     ansible.builtin.set_fact:
