@@ -7,7 +7,7 @@
   - name: Create public IP for Load Balancer
     azure.azcollection.azure_rm_publicipaddress:
       resource_group: "{{ resource_group }}"
-      name: "{{ lb_public_ip_name }}"
+      name: "{{ lb_pip_name }}"
       allocation_method: Static
       sku: Standard
       location: "{{ location }}"
@@ -21,7 +21,7 @@
       sku: Standard
       frontend_ip_configurations:
         - name: "frontend-config"
-          public_ip_address: "{{ lb_public_ip_name }}"
+          public_ip_address: "{{ lb_pip_name }}"
       backend_address_pools:
         - name: "backend-pool"
       probes:
