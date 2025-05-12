@@ -1,5 +1,6 @@
 ---
 - name: Deployment Azure network objects
+  hosts: localhost
   connection: local
   tasks:
   
