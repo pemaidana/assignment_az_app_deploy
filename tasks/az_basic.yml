@@ -6,14 +6,14 @@
 
   - name: Create resource group
     azure.azcollection.azure_rm_resourcegroup:
-      name: "dev_123_pedro"
-      location: "eastus"
+      name: "{{ resource_group }}"
+      location: "{{ location }}"
 
   - name: Create storage account
     azure.azcollection.azure_rm_storageaccount:
-      resource_group: "dev_123_pedro"
-      name: pedro123pedro
-      account_type: Standard_LRS
+      resource_group: "{{ resource_group }}"
+      name: "{{ storage_account }}"
+      account_type: "{{ storage_account_type }}"
 
   - name: Successful Object creation
     ansible.builtin.set_fact:
