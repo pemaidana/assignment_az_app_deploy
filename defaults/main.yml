@@ -3,6 +3,7 @@
 resource_group: "nginx-app-rg"
 location: "eastus"
 storage_account: "stoaccountdev"
+storage_account_type: "Standard_LRS"
 
 # Network Configuration
 vnet_name: "az-deploy-vnet"
