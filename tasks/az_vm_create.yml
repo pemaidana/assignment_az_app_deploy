@@ -4,6 +4,10 @@
   connection: local
   tasks:
 
+  - name: Set some facts
+    ansible.builtin.set_fact:
+      vm_count: 0
+
   - name: Create and configure NICs for VMs
     azure.azcollection.azure_rm_networkinterface:
       resource_group: "{{ resource_group }}"
@@ -19,6 +23,10 @@
               loadbalancer: "{{ lb_name }}"
     loop: "{{ range(1, vm_count + 1)|list }}"
     register: nics
+
+  - name: Set some facts
+    ansible.builtin.set_fact:
+      vm_count: 0
 
   - name: Create virtual machine
     azure_rm_virtualmachine:
