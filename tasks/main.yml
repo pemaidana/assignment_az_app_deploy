@@ -9,3 +9,9 @@
 
 - name: Create basic Network infrastructure
   ansible.builtin.include_tasks: az_network.yml
+  
+- name: Create and configure basic Network Security
+  ansible.builtin.include_tasks: az_nw_sec_basic.yml
+
+- name: Create and configure Load Balancer
+  ansible.builtin.include_tasks: az_load_balancer.yml
