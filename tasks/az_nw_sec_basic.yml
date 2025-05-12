@@ -64,7 +64,7 @@
   - name: Create management NSG
     azure.azcollection.azure_rm_securitygroup:
       resource_group: "{{ resource_group }}"
-      name: "{{ management_nsg_name }}"
+      name: "{{ mgmt_nsg_name }}"
       location: "{{ location }}"
       rules:
         - name: "Allow-SSH-To-Backend"
@@ -99,10 +99,10 @@
   - name: Associate management NSG with subnet
     azure.azcollection.azure_rm_subnet:
       resource_group: "{{ resource_group }}"
-      name: "{{ management_subnet_name }}"
-      address_prefix: "{{ management_subnet_prefix }}"
+      name: "{{ mgmt_subnet_name }}"
+      address_prefix: "{{ mgmt_subnet_prefix }}"
       virtual_network: "{{ vnet_name }}"
-      security_group: "{{ management_nsg_name }}"
+      security_group: "{{ mgmt_nsg_name }}"
       state: present  
  
   - name: Successful Object creation
