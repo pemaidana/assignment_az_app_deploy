@@ -1,5 +1,51 @@
 ---
-jump_host: "starbuck.dow.com"
-zscaler_user: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
-zscaler_passwd: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
-ansible_python_interpreter: /usr/bin/python3
+# Azure Resource Configuration
+resource_group: "nginx-app-rg"
+location: "eastus"
+storage_account: "sto_account_dev"
+#admin_username: "azureuser"
+#admin_ssh_key: "ssh-rsa YOUR_SSH_PUBLIC_KEY"  # Replace with your SSH public key
+#admin_ip_address: "YOUR_IP_ADDRESS/32"  # Replace with your IP address for SSH access
+#ssh_private_key_path: "~/.ssh/id_rsa"  # Path to SSH private key on your control machine
+
+# Network Configuration
+vnet_name: "az-deploy-vnet"
+vnet_address_prefix: "10.10.0.0/16"
+frontend_subnet_name: "frontend-subnet"
+frontend_subnet_prefix: "10.10.1.0/24"
+backend_subnet_name: "backend-subnet"
+backend_subnet_prefix: "10.10.2.0/24"
+mgmt_subnet_name: "mgmt-subnet"
+mgmt_subnet_prefix: "10.10.3.0/24"
+app_nsg_name: "app-nsg"
+mgmt_nsg_name: "mgmt-nsg"
+
+# VM Configuration
+app_vm_prefix: "appvm"
+app_vm_size: "Standard_B2s"
+bastion_vm_name: "bastionvm"
+bastion_vm_size: "Standard_B1s"
+bastion_nic_name: "bastion-nic"
+avset_name: "app-avset"
+
+# Load Balancer Configuration
+lb_name: "app-lb"
+lb_pip_name: "lb-pip"
+app_dns_label: "nginx-app"  # Will create FQDN: nginx-app.eastus.cloudapp.azure.com
+bastion_pip_name: "bastion-pip"
+bastion_dns_label: "nginx-bastion"
+
+# SSL Configuration
+ssl_cert_path: "./ssl/cert.pem"
+ssl_key_path: "./ssl/key.pem"
+ssl_cert_name: "app-cert"
+ssl_cert_password: "changeme"  # For Key Vault import
+
+# Key Vault Configuration
+keyvault_name: "appkeyvault{{ resource_group | hash('md5') | truncate(8, True, '') }}"  # Ensuring unique name
+
+# Tags
+default_tags:
+  environment: "production"
+  application: "nginx-web-app"
+  deployed_by: "ansible"
