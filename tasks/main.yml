@@ -22,5 +22,5 @@
 - name: Create VMs and configure NICs
   ansible.builtin.include_tasks: az_vm_create.yml
 
-- name: Configure VMs
+- name: Install docker web application
   ansible.builtin.include_tasks: az_configure_vms.yml
