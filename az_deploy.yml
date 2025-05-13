@@ -6,4 +6,4 @@
   tasks:
     - name: Calling Azure Web App provision Role
       include_role:
-        name: nokia_ndac_simcard_provisioning
+        name: assignment_az_app_deploy
