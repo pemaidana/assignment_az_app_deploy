@@ -9,6 +9,9 @@ subscription_id: "f7368a3e-a499-466a-8e7f-6e01890d79ff"
 # Project Name
 az_prefix: "{{ prefix | default('task') }}"
 
+# Availability Set
+av_set: "{{ az_prefix }}-av"
+
 # Network Configuration
 vnet_name: "{{ az_prefix }}-vnet"
 vnet_address_prefix: "10.10.0.0/16"
