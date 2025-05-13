@@ -35,13 +35,21 @@
       name: "{{ backend_nsg_name }}"
       location: "{{ location }}"
       rules:
-        - name: "Allow-HTTPS-From-Frontend"
+        - name: "Allow-HTTPS-From-Frontend" #this is ineed used by LB
           protocol: Tcp
           destination_port_range: 443
           access: Allow
           priority: 100
           direction: Inbound
           source_address_prefix: "{{ frontend_subnet_prefix }}"
+          destination_address_prefix: '*'
+        - name: "Allow-HTTPS-From-Clients" #this is ineed used by LB
+          protocol: Tcp
+          destination_port_range: 443
+          access: Allow
+          priority: 101
+          direction: Inbound
+          source_address_prefix: Any
           destination_address_prefix: '*'
         - name: "Allow-Outbound-Updates"
           protocol: Tcp
