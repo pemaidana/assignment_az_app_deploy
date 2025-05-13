@@ -1,4 +1,4 @@
-# Azure Stateless Application Deployment automated with Ansible
+# Azur Cloud Network Infrastructure and Stateless Application Deployment automated with Ansible
 
 How to Use This Solution
 1.	Clone the Repository: Clone the GitHub repository once set up.
@@ -7,7 +7,7 @@ How to Use This Solution
 4.	Access the Application: Access the application via HTTPS through the load balancer's public IP or DNS name.
 
 
-# Highly available Web Application on a cloud provider with Ansible
+# Highly available Web Application on Azure cloud provider with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
 The goal is to provision one or more web server instances behind a load balancer on any cloud provider automatically. See the following image for an example on Azure. 
