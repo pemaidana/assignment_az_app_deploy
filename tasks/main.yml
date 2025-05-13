@@ -15,3 +15,9 @@
 
 - name: Create and configure Load Balancer
   ansible.builtin.include_tasks: az_load_balancer.yml
+
+- name: Create and configure AzureBastion
+  ansible.builtin.include_tasks: az_bastion_create.yml
+
+- name: Configure VMs
+  ansible.builtin.include_tasks: az_configure_vms.yml
