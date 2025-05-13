@@ -1,0 +1,95 @@
+---
+- name: Prepare cloud-init config for Ubuntu 24.04 VM on Azure with Docker
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: Create cloud-init configuration
+    copy:
+      dest: "cloud-init.yaml"
+      content: |
+        #cloud-config
+        package_upgrade: true
+        packages:
+          - ca-certificates
+          - curl
+          - gnupg
+        
+        write_files:
+          - path: /tmp/nginx_demo_app_install.sh
+            permissions: '0755'
+            content: |
+              #!/bin/bash
+              # Add Docker's official GPG key
+              sudo apt-get update
+              sudo apt-get install -y ca-certificates curl
+              sudo install -m 0755 -d /etc/apt/keyrings
+              sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+              sudo chmod a+r /etc/apt/keyrings/docker.asc
+              
+              # Add the repository to Apt sources
+              echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+              
+              sudo apt-get update
+              sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+              
+              # Add the current user to the docker group to run docker without sudo
+              sudo usermod -aG docker ${USER}
+              
+              # FIX for a well-known-by-me issue to run docker
+              sudo usermod -aG docker $USER
+              newgrp docker
+
+              # Pull and run the NGINX demo container
+              sudo docker pull nginxdemos/hello
+              sudo docker run -P -d nginxdemos/hello
+              
+              # Configure firewall rule to allow incoming connections on TCP-443
+              sudo ufw allow https
+
+              # Show running containers
+              sudo docker ps
+        
+        runcmd:
+          - bash /tmp/nginx_demo_app_install.sh
+        
+        # Enable logs
+        output: {all: '| tee -a /var/log/cloud-init-output.log'}
+
+
+        #!/bin/bash
+        # Install Nginx
+        apt-get update
+        apt-get install -y nginx
+        
+        # Create self-signed SSL certificate
+        mkdir -p /etc/ssl/private
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+          -keyout /etc/ssl/private/nginx-selfsigned.key \
+          -out /etc/ssl/certs/nginx-selfsigned.crt \
+          -subj "/C=US/ST=State/L=City/O=Organization/CN=example.com"
+        
+        # Configure Nginx for HTTPS
+        cat > /etc/nginx/sites-available/default <<EOF
+        server {
+            listen 443 ssl default_server;
+            listen [::]:443 ssl default_server;
+            
+            ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+            ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+            
+            root /var/www/html;
+            index index.html index.htm;
+            
+            server_name _;
+            
+            location / {
+                try_files \$uri \$uri/ =404;
+            }
+        }
+        EOF
+        
+        # Create a sample web page
+        echo "<html><body><h1>Hello from Web VM{{ item }}</h1></body></html>" > /var/www/html/index.html
+        
+        # Restart Nginx
+        systemctl restart nginx
