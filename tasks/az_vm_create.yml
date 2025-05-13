@@ -50,6 +50,7 @@
       admin_password: "{{ admin_password }}"
       availability_set: "{{ av_set }}"
       network_interfaces: "vm-01-nic"
+      custom_data: "{{ lookup('file', 'cloud-init.yaml') }}"
       image:
         offer: ubuntu-24_04-lts
         publisher: Canonical
@@ -71,6 +72,7 @@
       admin_password: "{{ admin_password }}"
       availability_set: "{{ av_set }}"
       network_interfaces: "vm-02-nic"
+      custom_data: "{{ lookup('file', 'cloud-init.yaml') }}"
       image:
         offer: ubuntu-24_04-lts
         publisher: Canonical
