@@ -30,7 +30,7 @@
       state: present
     register: backend_subnet
         
-  - name: Create management subnet
+  - name: Create Bastion subnet
     azure.azcollection.azure_rm_subnet:
       resource_group: "{{ resource_group }}"
       name: "{{ management_subnet_name }}"
