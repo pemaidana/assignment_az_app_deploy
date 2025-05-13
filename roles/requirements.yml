@@ -1,0 +1,5 @@
+---
+- name: assignment_az_app_deploy
+  scm: 'git'
+  src: https://github.com/pemaidana/assignment_az_app_deploy.git
+  version: main
