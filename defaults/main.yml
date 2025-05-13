@@ -1,22 +1,25 @@
 ---
 # Azure Resource Configuration
-resource_group: "nginx-app-rg"
+resource_group: "{{ az_prefix }}"
 location: "eastus"
 storage_account: "stoaccountdev"
 storage_account_type: "Standard_LRS"
 
+# Project Name
+az_prefix: "{{ prefix | default('task') }}"
+
 # Network Configuration
-vnet_name: "az-deploy-vnet"
+vnet_name: "{{ az_prefix }}--vnet"
 vnet_address_prefix: "10.10.0.0/16"
-frontend_subnet_name: "frontend-subnet"
+frontend_subnet_name: "{{ az_prefix }}-frontend-subnet"
 frontend_subnet_prefix: "10.10.1.0/24"
-backend_subnet_name: "backend-subnet"
+backend_subnet_name: "{{ az_prefix }}-backend-subnet"
 backend_subnet_prefix: "10.10.2.0/24"
 mgmt_subnet_name: "AzureBastionSubnet"
 mgmt_subnet_prefix: "10.10.3.0/24"
-frontend_nsg_name: "frontend-nsg"
-backend_nsg_name: "backend-nsg"
-mgmt_nsg_name: "mgmt-nsg"
+frontend_nsg_name: "{{ az_prefix }}-frontend-nsg"
+backend_nsg_name: "{{ az_prefix }}-backend-nsg"
+mgmt_nsg_name: "{{ az_prefix }}-mgmt-nsg"
 
 # APP VM Configuration
 vm_count: 0
@@ -28,19 +31,19 @@ storage_container: "testv"
 
 
 # VM Configuration
-app_vm_prefix: "appvm"
-app_vm_size: "Standard_B2s"
-bastion_vm_name: "bastionvm"
+app_vm_prefix: "{{ az_prefix }}-appvm-01"
+app_vm_size: "Standard_B1s"
+bastion_vm_name: "{{ az_prefix }}-bastionvm"
 bastion_vm_size: "Standard_B1s"
-bastion_nic_name: "bastion-nic"
-avset_name: "app-avset"
+bastion_nic_name: "{{ az_prefix }}-bastion-nic"
+#avset_name: "app-avset"
 
 # Load Balancer Configuration
-lb_name: "app-lb"
-lb_pip_name: "lb-pip"
-app_dns_label: "nginx-app"  # Will create FQDN: nginx-app.eastus.cloudapp.azure.com
-bastion_pip_name: "bastion-pip"
-bastion_dns_label: "nginx-bastion"
+lb_name: "{{ az_prefix }}-lb"
+lb_pip_name: "{{ az_prefix }}-lb-pip"
+app_dns_label: "{{ az_prefix }}-nginx-app"  # Will create FQDN: nginx-app.eastus.cloudapp.azure.com
+bastion_pip_name: "{{ az_prefix }}-bastion-pip"
+bastion_dns_label: "{{ az_prefix }}-nginx-bastion"
 
 # SSL Configuration
 ssl_cert_path: "./ssl/cert.pem"
@@ -54,5 +57,5 @@ keyvault_name: "appkeyvault{{ resource_group | hash('md5') | truncate(8, True, '
 # Tags
 default_tags:
   environment: "production"
-  application: "nginx-web-app"
+  application: "{{ az_prefix }}-app"
   deployed_by: "ansible"
