@@ -30,11 +30,11 @@
       state: present
     register: backend_subnet
         
-  - name: Create Bastion subnet
+  - name: Create management subnet
     azure.azcollection.azure_rm_subnet:
       resource_group: "{{ resource_group }}"
-      name: "{{ management_subnet_name }}"
-      address_prefix: "{{ management_subnet_prefix }}"
+      name: "{{ mgmt_subnet_name }}"
+      address_prefix: "{{ mgmt_subnet_prefix }}"
       virtual_network: "{{ vnet_name }}"
       state: present
     register: management_subnet
@@ -42,4 +42,4 @@
   - name: Successful Object creation
     ansible.builtin.set_fact:
       exec_rc: 0
-      exec_message: “Azure RG and Storage account created with success”
+      exec_message: “Azure VNET and Subnets created with success”
