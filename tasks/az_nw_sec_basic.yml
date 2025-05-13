@@ -60,22 +60,6 @@
           source_address_prefix: Internet
           destination_address_prefix: '*'
     register: backend_nsg
-      
-  - name: Create management NSG
-    azure.azcollection.azure_rm_securitygroup:
-      resource_group: "{{ resource_group }}"
-      name: "{{ mgmt_nsg_name }}"
-      location: "{{ location }}"
-      rules:
-        - name: "Allow-SSH-To-Backend"
-          protocol: Tcp
-          destination_port_range: 22
-          access: Allow
-          priority: 100
-          direction: Outbound
-          source_address_prefix: '*'
-          destination_address_prefix: "{{ backend_subnet_prefix }}"
-    register: management_nsg
 
   # Associate NSGs with subnets
   - name: Associate frontend NSG with subnet
@@ -95,15 +79,6 @@
       virtual_network: "{{ vnet_name }}"
       security_group: "{{ backend_nsg_name }}"
       state: present
-      
-  - name: Associate management NSG with subnet
-    azure.azcollection.azure_rm_subnet:
-      resource_group: "{{ resource_group }}"
-      name: "{{ mgmt_subnet_name }}"
-      address_prefix: "{{ mgmt_subnet_prefix }}"
-      virtual_network: "{{ vnet_name }}"
-      security_group: "{{ mgmt_nsg_name }}"
-      state: present  
  
   - name: Successful Object creation
     ansible.builtin.set_fact:
