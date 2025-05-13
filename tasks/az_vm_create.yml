@@ -48,6 +48,7 @@
       storage_blob: "vm-01-blob.vhd"
       admin_username: "{{ admin_username }}"
       admin_password: "{{ admin_password }}"
+      availability_set: "{{ av_set }}"
       network_interfaces: "vm-01-nic"
       image:
         offer: ubuntu-24_04-lts
@@ -68,6 +69,7 @@
       storage_blob: "vm-02-blob.vhd"
       admin_username: "{{ admin_username }}"
       admin_password: "{{ admin_password }}"
+      availability_set: "{{ av_set }}"
       network_interfaces: "vm-02-nic"
       image:
         offer: ubuntu-24_04-lts
