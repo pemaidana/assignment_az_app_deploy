@@ -169,8 +169,9 @@ availability-set:
 
 # Security Architecture Options to secure Web Application
 
-### Add an Azure Firewall existing setup: increased and cost-effective protection.
-Benefits:
+## Add an Azure Firewall existing setup: increased and cost-effective protection.
+
+### Benefits:
 
 - Cost-effective compared to App Gateway
 - Layer 4 load balancing
@@ -189,8 +190,9 @@ Below is the architecture diagram generated with: https://github.com/mingrammer/
 
 
 <br/><br/>
-### Application Gateway with WAF in fron of existing setup: best option for Web traffic protection. 
-Benefits:
+## Application Gateway with WAF in front of existing setup
+
+### Benefits:
 
 - WAF provides protection against OWASP Top 10 vulnerabilities
 - Layer 7 traffic inspection and filtering
