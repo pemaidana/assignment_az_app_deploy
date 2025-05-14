@@ -102,12 +102,16 @@ bastion:
   1: project-bastion
 availability-set:
   vms:
-    1: ubuntu 24.04 LTS
+    1: project-vm-01
+      image:
+        1: ubuntu 24.04 LTS
       nic:
         1: nic-vm-01
       disk:
         1: disk-vm-01
-    2: ubuntu 24.04 LTS
+    2: project-vm-02
+      image: 
+        1: ubuntu 24.04 LTS
       nic:
         1: nic-vm-02
       disk:
