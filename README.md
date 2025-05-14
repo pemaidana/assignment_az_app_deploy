@@ -27,6 +27,35 @@
 
 
 
+## Suggested approaches to adopt this Automation
+
+1. Ansible as a tool for the Cloud Engineering team:
+
+
+<p align="center">
+<img height="400" src="./pictures/automated_ansible.jpg">
+</p>
+
+
+
+2. Use ChatOps for simplifying the usage of Automation
+
+ 
+<p align="center">
+<img height="400" src="./pictures/automated_chatops.jpg">
+</p>
+
+
+
+3. Fully Automated using ServiceNow Service Catalog:
+
+ 
+<p align="center">
+<img height="400" src="./pictures/fully_automated.jpg">
+</p>
+
+
+
 ## Solution Overview
 
 This Ansible solution automates the deployment and configuration of Web App on Azure Cloud.
