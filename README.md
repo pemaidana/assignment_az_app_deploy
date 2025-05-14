@@ -6,7 +6,7 @@
 
 1. Cloud Engineers spend hours implementing requests to deploy Azure Cloud infrastructure.
 
-2. Requests often take days to be completed due to Cloud Team need to focus on troubleshooting issues and implementing other projects.
+2. Requests often take days to be completed due to Cloud Team is busy troubleshooting issues and implementing other projects.
 
 3. Tasks are repetitive and error-prone due to manual steps required.
 
