@@ -89,7 +89,7 @@ Azure Standard Load Balancer is also placed in front of Azure VMs.
 <br/><br/>
 
 <p align="center">
-<img height="400" src="./pictures/av.jpg">
+<img height="400" src="./pictures/avset.jpg">
 </p>
 
 <p align="center">
