@@ -209,7 +209,7 @@ Follow these steps to provision the Web Server(s).
 </p>
 
 <br/><br/>
-5. It should look like this when it finishes, useful information about VMs created:
+5. Execution log will include lots of information, meanwhile the useful information ofr Final User is about VMs created:
 
 <p align="center">
 <img src="./pictures/job_results.jpg">
