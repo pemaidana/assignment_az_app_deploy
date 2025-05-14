@@ -180,7 +180,7 @@ Follow these steps to provision the Web Server(s).
 1. Create a Project for this repo (`https://github.com/pemaidana/assignment_az_app_deploy`). I called the Project `network_az_web_app_deployment` in the example below.
 
 <p align="center">
-<img src="./pictures/project.jpg">
+<img src="./pictures/aap_project.jpg">
 </p>
 
 2. Create a [Microsoft Azure Resource Manager](https://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#microsoft-azure-resource-manager) credential with your [Azure service principal parameters](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
