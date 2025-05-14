@@ -1,4 +1,4 @@
-# Azure
+# Configure components to integrate Ansible with Azure Cloud
 
 ## Python libraries
 
