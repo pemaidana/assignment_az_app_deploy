@@ -29,7 +29,7 @@
 
 ## Suggested approaches to adopt this Automation
 
-1. Ansible as a tool for the Cloud Engineering team:
+### 1. Ansible as a tool for the Cloud Engineering team:
 
 
 <p align="center">
@@ -38,7 +38,7 @@
 
 
 
-2. Use ChatOps for simplifying the usage of Automation
+### 2. Use ChatOps for simplifying the usage of Automation
 
  
 <p align="center">
@@ -47,12 +47,14 @@
 
 
 
-3. Fully Automated using ServiceNow Service Catalog:
+### 3. Fully Automated using ServiceNow Service Catalog:
 
  
 <p align="center">
 <img height="400" src="./pictures/fully_automated.jpg">
 </p>
+
+### This asset is focused on the Option 1, Ansible automation only.
 
 
 
