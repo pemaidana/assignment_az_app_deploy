@@ -78,14 +78,36 @@ The architecture approach is "cost-effective".
 <br/><br/>
 
 ```yaml
+resource-group:
+
 vnet:
-subnets:
+  1: project-vnet
+subnet:
   1: backend
   2: frontend
   3: AzureBastionSubnet
-vms:
-  1: ubuntu 24.04 LTS
-  2: ubuntu 24.04 LTS
+nsg:
+  1: backend-nsg
+  2: frontend-nsg
+AzureLoadBalance:
+  1: project-lb
+  backend-pool:
+    1: node-1
+    2: node-2 
+  probe: 
+    1: 443/TCP
+  load-balance-rule:
+    1: 443/TCP
+bastion:
+  1: project-bastion
+availability-set:
+  vms:
+    1: ubuntu 24.04 LTS
+      nic:
+        1: nic-vm-01
+    2: ubuntu 24.04 LTS
+      nic:
+        1: nic-vm-02
 ```
 
 
