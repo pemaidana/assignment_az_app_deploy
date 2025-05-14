@@ -79,12 +79,12 @@ The architecture approach is "cost-effective".
 
 ```yaml
 resource-group:
-
+  1: project-rg
 vnet:
   1: project-vnet
 subnet:
-  1: backend
-  2: frontend
+  1: project-backend-subnet
+  2: project-frontend-subnet
   3: AzureBastionSubnet
 nsg:
   1: backend-nsg
@@ -105,9 +105,13 @@ availability-set:
     1: ubuntu 24.04 LTS
       nic:
         1: nic-vm-01
+      disk:
+        1: disk-vm-01
     2: ubuntu 24.04 LTS
       nic:
         1: nic-vm-02
+      disk:
+        1: disk-vm-02
 ```
 
 
