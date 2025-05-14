@@ -60,7 +60,7 @@
     - name: Create virtual machine
       azure_rm_virtualmachine:
         resource_group: "{{ resource_group }}"
-        name: "{{ vm_name_01 }}"
+        name: "{{ vm_name_02 }}"
         location: "{{ location }}"
         vm_size: "{{ vm_size }}"
         managed_disk_type: "{{ storage_account_type }}"
