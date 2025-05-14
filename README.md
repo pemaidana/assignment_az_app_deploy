@@ -163,10 +163,10 @@ availability-set:
         1: disk-vm-02
 ```
 
+<br/><br/>
 
-
-
-## Requirements
+# How to consume this Ansible Automation?
+## Pre-Reqs:
 
 - Azure subscription.
 - Ansible implementation is required.
