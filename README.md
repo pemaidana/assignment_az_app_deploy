@@ -13,6 +13,7 @@
 ## Problem Statement
 
 Cloud Engineers receive several requests to deploy Azure Cloud infrastructure for several internal teams.
+
 Tasks are repetitive and error-prone due to manual steps required.
 
 
@@ -26,7 +27,7 @@ This Ansible automation asset will connect to Azure Cloud to deploy and configur
 
 ## Requirements
 
-- [Azure](azure_reqs.md)
+- [Configure Ansible integration with Azure Cloud](azure_reqs.md)
 
 
 ## Creating a Job Template to Deploy the Web Server(s)
