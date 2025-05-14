@@ -24,7 +24,7 @@
         name: "vm-02-nic"
         virtual_network: "{{ vnet_name }}"
         subnet: "{{ backend_subnet_name }}"
-        #security_group: "{{ backend_nsg_name }}"
+        security_group: "{{ backend_nsg_name }}"
         ip_configurations:
           - name: "ipconfig-vm-02"
             primary: true
