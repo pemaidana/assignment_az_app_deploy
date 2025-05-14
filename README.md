@@ -47,8 +47,7 @@
 
 
 <br/><br/>
-### 3. Fully Automated using ServiceNow Service Catalog:
-Recommended approach.
+### 3. Fully Automated using ServiceNow Service Catalog (recommended):
 
 Free-up Cloud Team resources.
 
