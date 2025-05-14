@@ -22,8 +22,8 @@ ansible-galaxy collection install -r collections/requirements.yml
 Please provide these variables; `subscription_id`, `client_id`, `secret` and `tenant` for the next steps.
 
 - `AZURE_SUBSCRIPTION_ID`: [Find your Azure subscription](https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to?tabs=portal)
-- `AZURE_CLIENT_ID` and `AZURE_TENANT`: [Register an application with Azure AD and create a service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#register-an-application-with-azure-ad-and-create-a-service-principal)
-- `AZURE_SECRET`: [Create a new application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)
+- `AZURE_CLIENT_ID` and `AZURE_TENANT`: [Configure Azure CLI on Linux VM and get the values](https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli?view=azure-cli-latest)
+- `AZURE_SECRET`: [Create a new application secret, will be retrieved on next steps of this guide](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)
 
 ### Create an Azure service principal
 
