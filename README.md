@@ -1,14 +1,6 @@
 # High Available Azure Web App Deployment with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
-## Automation Solution Goal
-
-1. Reduce (or even avoid) efforts required from Cloud Engineering team to deploy Azure Cloud infrastructure.
-
-2. Standardize an automated procedure, avoid error-prone implementations.
-
-3. Provide building-block for Service Catalog consumption model (Ansible integration with ServiceNow required).
-
 
 ## Problem Statement
 
@@ -22,6 +14,17 @@
 <p align="center">
 <img height="400" src="./pictures/manual_process.jpg">
 </p>
+
+
+
+## Automation Solution Goal
+
+1. Reduce (or even avoid) efforts required from Cloud Engineering team to deploy Azure Cloud infrastructure.
+
+2. Standardize an automated procedure, avoid error-prone implementations.
+
+3. Provide building-block for Service Catalog consumption model (Ansible integration with ServiceNow required).
+
 
 
 ## Solution Overview
