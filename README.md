@@ -4,7 +4,7 @@
 
 ## Problem Statement
 
-1. Cloud Engineers spend hours implementing requests to deploy Azure Cloud infrastructure.
+1. Cloud Engineers spend hours implementing sereval requests to deploy Azure Cloud infrastructure.
 
 2. Requests often take days to be completed due to Cloud Team is busy troubleshooting issues and implementing other projects.
 
