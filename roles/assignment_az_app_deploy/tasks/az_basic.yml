@@ -1,0 +1,19 @@
+---
+- name: Deployment playbook initialization
+  delegate_to: "{{ jump_host }}"
+  block:
+    - name: Create resource group
+      azure.azcollection.azure_rm_resourcegroup:
+        name: "{{ resource_group }}"
+        location: "{{ location }}"
+
+    - name: Create storage account
+      azure.azcollection.azure_rm_storageaccount:
+        resource_group: "{{ resource_group }}"
+        name: "{{ storage_account }}"
+        account_type: "{{ storage_account_type }}"
+
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “Azure RG and Storage account created with success”

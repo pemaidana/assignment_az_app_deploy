@@ -1,0 +1,17 @@
+---
+- name: Azure Availability Set Creation
+  delegate_to: "{{ jump_host }}"
+  block:
+  
+    - name: Create an availability set with default options
+      azure.azcollection.azure_rm_availabilityset:
+        name: "{{ av_set }}"
+        location: "{{ location }}"
+        resource_group: "{{ resource_group }}"
+        sku: "Aligned"
+  
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “Azure Availability Set created with success”
+        

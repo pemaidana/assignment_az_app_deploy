@@ -1,0 +1,86 @@
+---
+- name: Create and configure Azure VMs and NICs IP configuration
+  delegate_to: "{{ jump_host }}"
+  block:
+
+    - name: Create and configure NICs for VMs
+      azure.azcollection.azure_rm_networkinterface:
+        resource_group: "{{ resource_group }}"
+        name: "vm-01-nic"
+        virtual_network: "{{ vnet_name }}"
+        subnet: "{{ backend_subnet_name }}"
+        security_group: "{{ backend_nsg_name }}"
+        ip_configurations:
+          - name: "ipconfig-vm-01"
+            primary: true
+            load_balancer_backend_address_pools:
+              - name: "backend-pool"
+                load_balancer: "{{ lb_name }}"
+      register: nics
+  
+    - name: Create and configure NICs for VMs
+      azure.azcollection.azure_rm_networkinterface:
+        resource_group: "{{ resource_group }}"
+        name: "vm-02-nic"
+        virtual_network: "{{ vnet_name }}"
+        subnet: "{{ backend_subnet_name }}"
+        security_group: "{{ backend_nsg_name }}"
+        ip_configurations:
+          - name: "ipconfig-vm-02"
+            primary: true
+            load_balancer_backend_address_pools:
+              - name: "backend-pool"
+                load_balancer: "{{ lb_name }}"
+        security_group: "{{ backend_nsg_name }}"
+      register: nics
+  
+    - name: Create virtual machine
+      azure_rm_virtualmachine:
+        resource_group: "{{ resource_group }}"
+        name: "{{ vm_name_01 }}"
+        location: "{{ location }}"
+        vm_size: "{{ vm_size }}"
+        managed_disk_type: "{{ storage_account_type }}"
+        os_disk_size_gb: "{{ disk_size }}"
+        storage_account: "{{ storage_account }}"
+        storage_container: "vm-01-container"
+        storage_blob: "vm-01-blob.vhd"
+        admin_username: "{{ admin_username }}"
+        admin_password: "{{ admin_password }}"
+        availability_set: "{{ av_set }}"
+        network_interfaces: "vm-01-nic"
+        #custom_data: "{{ lookup('file', 'cloud-init.txt') }}"
+        custom_data: "./cloud-init.txt"
+        image:
+          offer: ubuntu-24_04-lts
+          publisher: Canonical
+          sku: 'ubuntu-pro'
+          version: latest
+  
+    - name: Create virtual machine
+      azure_rm_virtualmachine:
+        resource_group: "{{ resource_group }}"
+        name: "{{ vm_name_02 }}"
+        location: "{{ location }}"
+        vm_size: "{{ vm_size }}"
+        managed_disk_type: "{{ storage_account_type }}"
+        os_disk_size_gb: "{{ disk_size }}"
+        storage_account: "{{ storage_account }}"
+        storage_container: "vm-02-container"
+        storage_blob: "vm-02-blob.vhd"
+        admin_username: "{{ admin_username }}"
+        admin_password: "{{ admin_password }}"
+        availability_set: "{{ av_set }}"
+        network_interfaces: "vm-02-nic"
+        #custom_data: "{{ lookup('file', 'cloud-init.txt') }}"
+        custom_data: "./cloud-init.txt"
+        image:
+          offer: ubuntu-24_04-lts
+          publisher: Canonical
+          sku: 'ubuntu-pro'
+          version: latest
+          
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “Azure VMs were created and configured with success”
