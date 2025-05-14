@@ -37,27 +37,27 @@
 </p>
 
 
-
+<br/><br/>
 ### 2. Use ChatOps for simplifying the usage of Automation
-
+<br/><br/>
  
 <p align="center">
 <img height="400" src="./pictures/automated_chatops.jpg">
 </p>
 
 
-
+<br/><br/>
 ### 3. Fully Automated using ServiceNow Service Catalog:
-
+<br/><br/>
  
 <p align="center">
 <img height="400" src="./pictures/fully_automated.jpg">
 </p>
-
+<br/><br/>
 ### This asset is focused on the Option 1, Ansible automation only.
 
-
-
+<br/><br/>
+<br/><br/>
 ## Solution Overview
 
 This Ansible solution automates the deployment and configuration of Web App on Azure Cloud.
