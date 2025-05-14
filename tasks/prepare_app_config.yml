@@ -1,7 +1,6 @@
 ---
 - name: Prepare cloud-init config for Ubuntu 24.04 VM on Azure with Docker
   delegate_to: "{{ jump_host }}"
-  gather_facts: yes
   block:
 
     - name: Create cloud-init configuration
