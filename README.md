@@ -4,9 +4,9 @@
 
 ## Problem Statement
 
-1. Cloud Engineers receive several requests to deploy Azure Cloud infrastructure.
+1. Cloud Engineers spend hours implementing requests to deploy Azure Cloud infrastructure.
 
-2. Requests are often delayed due to Cloud Engineer need to focus on troubleshooting and also implementing projects.
+2. Requests often take days to be completed due to Cloud Team need to focus on troubleshooting issues and implementing other projects.
 
 3. Tasks are repetitive and error-prone due to manual steps required.
 
