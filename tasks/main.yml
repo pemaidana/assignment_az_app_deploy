@@ -4,20 +4,20 @@
     exec_rc: 1
     exec_message: "The initial status didn't change during the execution of the playbook"
 
-- name: Connect to Azure and create basic objects
-  ansible.builtin.include_tasks: az_basic.yml
+#- name: Connect to Azure and create basic objects
+#  ansible.builtin.include_tasks: az_basic.yml
 
-- name: Create basic Network infrastructure
-  ansible.builtin.include_tasks: az_network.yml
+#- name: Create basic Network infrastructure
+#  ansible.builtin.include_tasks: az_network.yml
   
-- name: Create and configure basic Network Security
-  ansible.builtin.include_tasks: az_nw_sec_basic.yml
+#- name: Create and configure basic Network Security
+#  ansible.builtin.include_tasks: az_nw_sec_basic.yml
 
-- name: Create and configure Load Balancer
-  ansible.builtin.include_tasks: az_load_balancer.yml
+#- name: Create and configure Load Balancer
+#  ansible.builtin.include_tasks: az_load_balancer.yml
 
-- name: Create and configure AzureBastion
-  ansible.builtin.include_tasks: az_bastion_create.yml
+#- name: Create and configure AzureBastion
+#  ansible.builtin.include_tasks: az_bastion_create.yml
 
 - name: Create cloud-init VM configuration file
   ansible.builtin.include_tasks: prepare_app_config.yml
