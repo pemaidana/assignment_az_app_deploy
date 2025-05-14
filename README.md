@@ -69,6 +69,7 @@ All components are implemented with focus on provide security and high availibil
 The architecture approach is "cost-effective".
 
 Below is the architecture diagram generated with: https://github.com/mingrammer/diagrams
+<br/><br/>
 
 <p align="center">
 <img height="800" src="./pictures/azure_web_application_architecture.png">
