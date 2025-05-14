@@ -17,7 +17,7 @@
 
 
 
-## Automation Solution Goal
+## Automation Solution Benefits
 
 1. Reduce (or even avoid) efforts required from Cloud Engineering team to deploy Azure Cloud infrastructure.
 
