@@ -12,8 +12,6 @@ How to Use This Solution
 
 ## Goal
 
-Provide benefits listed below:
-
 1. Reduce efforts needed from Cloud Engineering team for Azure Cloud implementations.
 
 2. Standardize a procedure, less error-prone implementations.
