@@ -26,7 +26,7 @@
 3. Provide building-block for Service Catalog consumption model (Ansible integration with ServiceNow required).
 
 
-
+<br/><br/>
 ## Suggested approaches to adopt this Automation
 
 ### 1. Ansible as a tool for the Cloud Engineering team:
