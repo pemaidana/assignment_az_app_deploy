@@ -68,7 +68,7 @@ Leverages API integration between Ansible and ServiceNow.
 
 <br/><br/>
 
-## Solution Overview
+# Solution Overview
 
 ### This Ansible role creates all Azure components and services needed to deploy a High Available Web Application.
 <br/><br/>
