@@ -16,7 +16,7 @@ Provide benefits listed below:
 
 1. Reduce efforts needed from Cloud Engineering team for Azure Cloud implementations.
 
-2. Standardized procedure, less error-prone implementations.
+2. Standardize a procedure, less error-prone implementations.
 
 3. Provide on-demand consumption model for Azure Cloud implementations (integration between Ansible and ServiceNow is required).
 
