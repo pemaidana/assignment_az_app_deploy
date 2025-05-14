@@ -98,6 +98,13 @@ Azure Standard Load Balancer is located on the Frontend Subnet as it has specifi
 Azure Load Balancer has a Public IP to receive connection from clients on the Internet.
 
 <br/><br/>
+### VM Secure Access: Azure Bastion Service.
+
+Azure VMs only SSH accessible thru Azure Bastion that is part of this solution.
+
+This provide high level security to unwanted management access to Azure VMs.
+
+<br/><br/>
 ### Application Security: SSL Encryption, Load Balancing Rules.
 
 Azure VMs are deployed with SSL configuration and internal firewall-rule to allow incoming connection to Web App on TCP-443 port.
