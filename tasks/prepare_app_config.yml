@@ -50,49 +50,39 @@
                 sudo docker ps
           
           runcmd:
-            - bash /tmp/nginx_demo_app_install.sh
-          
-          # Enable logs
-          output: {all: '| tee -a /var/log/cloud-init-output.log'}
-  
-  
-          #!/bin/bash
-          # Install Nginx
-          apt-get update
-          apt-get install -y nginx
-          
-          # Create self-signed SSL certificate
-          mkdir -p /etc/ssl/private
-          openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-            -keyout /etc/ssl/private/nginx-selfsigned.key \
-            -out /etc/ssl/certs/nginx-selfsigned.crt \
-            -subj "/C=US/ST=State/L=City/O=Organization/CN=example.com"
-          
-          # Configure Nginx for HTTPS
-          cat > /etc/nginx/sites-available/default <<EOF
-          server {
-              listen 443 ssl default_server;
-              listen [::]:443 ssl default_server;
-              
-              ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-              ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
-              
-              root /var/www/html;
-              index index.html index.htm;
-              
-              server_name _;
-              
-              location / {
-                  try_files \$uri \$uri/ =404;
-              }
-          }
-          EOF
-          
-          # Create a sample web page
-          echo "<html><body><h1>Hello from Web VM{{ item }}</h1></body></html>" > /var/www/html/index.html
-          
-          # Restart Nginx
-          systemctl restart nginx
+            bash /tmp/nginx_demo_app_install.sh
+            # Install Nginx
+            apt-get update
+            apt-get install -y nginx
+            # Create self-signed SSL certificate
+            mkdir -p /etc/ssl/private
+            openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+              -keyout /etc/ssl/private/nginx-selfsigned.key \
+              -out /etc/ssl/certs/nginx-selfsigned.crt \
+              -subj "/C=US/ST=State/L=City/O=Organization/CN=example.com"
+            # Configure Nginx for HTTPS
+            cat > /etc/nginx/sites-available/default <<EOF
+            server {
+                listen 443 ssl default_server;
+                listen [::]:443 ssl default_server;
+                
+                ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+                ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+                
+                root /var/www/html;
+                index index.html index.htm;
+                
+                server_name _;
+                
+                location / {
+                    try_files \$uri \$uri/ =404;
+                }
+            }
+            EOF
+            # Create a sample web page
+            echo "<html><body><h1>Hello from Web VM{{ item }}</h1></body></html>" > /var/www/html/index.html
+            # Restart Nginx
+            systemctl restart nginx
           
     - name: Successful Object creation
       ansible.builtin.set_fact:
