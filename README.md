@@ -29,7 +29,7 @@
 
 
 <br/><br/>
-## Suggested approaches to adopt this Automation
+# Suggested approaches to adopt this Automation
 
 ### 1. Ansible as a tool for the Cloud Engineering team:
 <br/><br/>
