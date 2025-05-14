@@ -73,14 +73,36 @@ Leverages API integration between Ansible and ServiceNow.
 ### This Ansible role creates all Azure components and services needed to deploy a High Available Web Application.
 
 <br/><br/>
-### Azure Load Balance and Availability Set for VM HA.
+### VMs High Availability: Azure Load Balancer and Availability
 
 Azure VMs are placed into a Availability-Set to provide High Availability.
 
-An Azure Standard Load Balancer is also placed in front of Azure VMs to improve the Availability and Resiliency of the Application.
+Azure Standard Load Balancer is also placed in front of Azure VMs.
+
+<br/><br/>
+### Network Security: Subnets, Network Security Groups, Network Rules.
+
+Azure VMs are placed in a specific BackEnd Subnet that is protected by a Network Security Group.
+
+Azure VMs don't have Public IPs to avoid unwanted external access.
+
+Azure Standard Load Balancer is located on the Frontend Subnet as it has specific rules to allow Web App client access.
+
+Azure Load Balancer has a Public IP to receive connection from clients on the Internet.
+
+<br/><br/>
+### Application Security: SSL Encryption, Load Balancing Rules.
+
+Azure VMs are deployed with SSL configuration and internal firewall-rule to allow incoming connection to Web App on TCP-443 port.
+
+Azure Load Balance rule are applied to allow only TCP-443 traffic from External sources to App VMs.
+
+<br/><br/>
+### Application: NGINX and Docker.
+
+Azure VMs are deployed with pre-configuration including NGINX, Docker engine and NGINXdemos-hello docker image..
 
 
-The architecture approach is "cost-effective".
 
 <br/><br/>
 ### Solution components and properties:
