@@ -187,7 +187,7 @@ Follow these steps to provision the Web Server(s).
 2. Create a Job Template pointing to [az_webapp_deploy.yml](az_webapp_deploy.yml).
 
 <p align="center">
-<img src="./pictures/aap_jobtemplate.png">
+<img src="./pictures/aap_jobtemplate.jpg">
 </p>
 
 5. Run the Job Template.
