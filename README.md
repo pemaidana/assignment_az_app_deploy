@@ -30,7 +30,7 @@
 ## Suggested approaches to adopt this Automation
 
 ### 1. Ansible as a tool for the Cloud Engineering team:
-
+<br/><br/>
 
 <p align="center">
 <img height="400" src="./pictures/automated_ansible.jpg">
