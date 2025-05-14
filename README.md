@@ -12,17 +12,19 @@
 
 ## Problem Statement
 
-Cloud Engineers receive several requests to deploy Azure Cloud infrastructure.
+1. Cloud Engineers receive several requests to deploy Azure Cloud infrastructure.
 
-Requests are often delayed due to Cloud Engineer need to focus on troubleshooting and also implementing projects.
+2. Requests are often delayed due to Cloud Engineer need to focus on troubleshooting and also implementing projects.
 
-Tasks are repetitive and error-prone due to manual steps required.
+3. Tasks are repetitive and error-prone due to manual steps required.
 
 
 ## Solution Overview
 
 This Ansible solution automates the deployment and configuration of Web App on Azure Cloud.
+
 All components are implemented with focus on provide security and high availibility for the proposed architecture.
+
 The architecture approach is "cost-effective".
 
 <p align="center">
