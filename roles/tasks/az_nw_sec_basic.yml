@@ -1,0 +1,92 @@
+---
+- name: Create and configure basic network security objects
+  delegate_to: "{{ jump_host }}"
+  block:
+  
+    - name: Create frontend NSG
+      azure.azcollection.azure_rm_securitygroup:
+        resource_group: "{{ resource_group }}"
+        name: "{{ frontend_nsg_name }}"
+        location: "{{ location }}"
+        rules:
+          - name: "Allow-HTTPS"
+            protocol: Tcp
+            destination_port_range: 443
+            access: Allow
+            priority: 100
+            direction: Inbound
+            source_address_prefix: Internet
+            destination_address_prefix: '*'
+          - name: "Deny-All-Inbound"
+            protocol: '*'
+            destination_port_range: '*'
+            access: Deny
+            priority: 4096
+            direction: Inbound
+            source_address_prefix: Internet
+            destination_address_prefix: '*'
+      register: frontend_nsg
+        
+    - name: Create backend NSG
+      azure.azcollection.azure_rm_securitygroup:
+        resource_group: "{{ resource_group }}"
+        name: "{{ backend_nsg_name }}"
+        location: "{{ location }}"
+        rules:
+          - name: "Allow-HTTPS-From-Frontend"
+            protocol: Tcp
+            destination_port_range: 443
+            access: Allow
+            priority: 100
+            direction: Inbound
+            source_address_prefix: "{{ frontend_subnet_prefix }}"
+            destination_address_prefix: '*'
+          - name: "Allow-HTTPS-From-Clients" #this is used even we do have an AzureLB
+            protocol: Tcp
+            destination_port_range: 443
+            access: Allow
+            priority: 101
+            direction: Inbound
+            source_address_prefix: '*'
+            destination_address_prefix: '*'
+          - name: "Allow-Outbound-Updates"
+            protocol: Tcp
+            destination_port_range: '*'
+            access: Allow
+            priority: 200
+            direction: Outbound
+            source_address_prefix: '*'
+            destination_address_prefix: Internet
+          - name: "Deny-Direct-Internet"
+            protocol: '*'
+            destination_port_range: '*'
+            access: Deny
+            priority: 4096
+            direction: Inbound
+            source_address_prefix: Internet
+            destination_address_prefix: '*'
+      register: backend_nsg
+  
+    # Associate NSGs with subnets
+    - name: Associate frontend NSG with subnet
+      azure.azcollection.azure_rm_subnet:
+        resource_group: "{{ resource_group }}"
+        name: "{{ frontend_subnet_name }}"
+        address_prefix: "{{ frontend_subnet_prefix }}"
+        virtual_network: "{{ vnet_name }}"
+        security_group: "{{ frontend_nsg_name }}"
+        state: present
+        
+    - name: Associate backend NSG with subnet
+      azure.azcollection.azure_rm_subnet:
+        resource_group: "{{ resource_group }}"
+        name: "{{ backend_subnet_name }}"
+        address_prefix: "{{ backend_subnet_prefix }}"
+        virtual_network: "{{ vnet_name }}"
+        security_group: "{{ backend_nsg_name }}"
+        state: present
+   
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “Azure basic network security was configured with success”

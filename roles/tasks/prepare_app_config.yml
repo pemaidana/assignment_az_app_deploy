@@ -1,0 +1,60 @@
+---
+- name: Prepare cloud-init config for Ubuntu 24.04 VM on Azure with Docker
+  delegate_to: "{{ jump_host }}"
+  block:
+
+    - name: Create cloud-init configuration
+      copy:
+        dest: "cloud-init.txt"
+        content: |
+          #cloud-config
+          package_upgrade: true
+          packages:
+            - ca-certificates
+            - curl
+            - gnupg
+          
+          write_files:
+            - path: /tmp/docker_install.sh
+              permissions: '0755'
+              content: |
+                #!/bin/bash
+                # Add Docker's official GPG key
+                sudo apt-get update
+                sudo apt-get install -y ca-certificates curl
+                sudo install -m 0755 -d /etc/apt/keyrings
+                sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+                sudo chmod a+r /etc/apt/keyrings/docker.asc
+                
+                # Add the repository to Apt sources
+                echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+                
+                sudo apt-get update
+                sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+                
+                # Add the current user to the docker group to run docker without sudo
+                sudo usermod -aG docker ${USER}
+                
+                # Pull and run the NGINX demo container
+                sudo docker pull nginxdemos/hello
+                sudo docker run -P -d nginxdemos/hello
+                
+                # Show running containers
+                sudo docker ps > /home/{{ admin_username }}/docker_containers.txt
+          
+          runcmd:
+            - bash /tmp/docker_install.sh
+          
+          # Enable logs
+          output: {all: '| tee -a /var/log/cloud-init-output.log'}
+
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “cloud-init configuration for VMs was prepared with success”
+        
+  rescue:
+    - name: Issue while running commands
+      ansible.builtin.set_fact:
+        exec_rc: 2
+        exec_message: “An issue occurred while creating the cloud-init configuration file”
