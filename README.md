@@ -37,7 +37,7 @@
 </p>
 
 
-
+<br/><br/>
 ### 2. Use ChatOps for simplifying the usage of Automation
 <br/><br/>
  
@@ -46,14 +46,16 @@
 </p>
 
 
-
+<br/><br/>
 ### 3. Fully Automated using ServiceNow Service Catalog:
 <br/><br/>
  
 <p align="center">
 <img height="400" src="./pictures/fully_automated.jpg">
 </p>
+
 <br/><br/>
+
 ### This asset is focused on the Option 1, Ansible automation only.
 
 <br/><br/>
