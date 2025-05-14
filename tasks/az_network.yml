@@ -1,45 +1,45 @@
 ---
 - name: Deployment Azure network objects
-  hosts: localhost
-  connection: local
-  tasks:
+  delegate_to: "{{ jump_host }}"
+  block:
   
-  - name: Create virtual network
-    azure.azcollection.azure_rm_virtualnetwork:
-      resource_group: "{{ resource_group }}"
-      name: "{{ vnet_name }}"
-      address_prefixes: "{{ vnet_address_prefix }}"
-      state: present
-    register: vnet
+    - name: Create virtual network
+      azure.azcollection.azure_rm_virtualnetwork:
+        resource_group: "{{ resource_group }}"
+        name: "{{ vnet_name }}"
+        address_prefixes: "{{ vnet_address_prefix }}"
+        state: present
+      register: vnet
+          
+    - name: Create frontend subnet
+      azure.azcollection.azure_rm_subnet:
+        resource_group: "{{ resource_group }}"
+        name: "{{ frontend_subnet_name }}"
+        address_prefix: "{{ frontend_subnet_prefix }}"
+        virtual_network: "{{ vnet_name }}"
+        state: present
+      register: frontend_subnet
+          
+    - name: Create backend subnet
+      azure.azcollection.azure_rm_subnet:
+        resource_group: "{{ resource_group }}"
+        name: "{{ backend_subnet_name }}"
+        address_prefix: "{{ backend_subnet_prefix }}"
+        virtual_network: "{{ vnet_name }}"
+        state: present
+      register: backend_subnet
+          
+    - name: Create management subnet
+      azure.azcollection.azure_rm_subnet:
+        resource_group: "{{ resource_group }}"
+        name: "{{ mgmt_subnet_name }}"
+        address_prefix: "{{ mgmt_subnet_prefix }}"
+        virtual_network: "{{ vnet_name }}"
+        state: present
+      register: management_subnet
+  
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “Azure VNET and Subnets created with success”
         
-  - name: Create frontend subnet
-    azure.azcollection.azure_rm_subnet:
-      resource_group: "{{ resource_group }}"
-      name: "{{ frontend_subnet_name }}"
-      address_prefix: "{{ frontend_subnet_prefix }}"
-      virtual_network: "{{ vnet_name }}"
-      state: present
-    register: frontend_subnet
-        
-  - name: Create backend subnet
-    azure.azcollection.azure_rm_subnet:
-      resource_group: "{{ resource_group }}"
-      name: "{{ backend_subnet_name }}"
-      address_prefix: "{{ backend_subnet_prefix }}"
-      virtual_network: "{{ vnet_name }}"
-      state: present
-    register: backend_subnet
-        
-  - name: Create management subnet
-    azure.azcollection.azure_rm_subnet:
-      resource_group: "{{ resource_group }}"
-      name: "{{ mgmt_subnet_name }}"
-      address_prefix: "{{ mgmt_subnet_prefix }}"
-      virtual_network: "{{ vnet_name }}"
-      state: present
-    register: management_subnet
-
-  - name: Successful Object creation
-    ansible.builtin.set_fact:
-      exec_rc: 0
-      exec_message: “Azure VNET and Subnets created with success”
