@@ -21,7 +21,7 @@ Tasks are repetitive and error-prone due to manual steps required.
 
 ## Solution Overview
 
-This Ansible automation asset will connect to Azure Cloud to deploy and configure all components of the proposed architecture.
+This Ansible solution automates the deployment and configuration of Web App required components with focus on providing cost-effective and ensure security and high availibility for the proposed architecture.
 
 <p align="center">
 <img height="800" src="./pictures/azure_web_application_architecture.png">
