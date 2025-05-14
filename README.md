@@ -70,9 +70,15 @@ Leverages API integration between Ansible and ServiceNow.
 
 ## Solution Overview
 
-This Ansible solution automates the deployment and configuration of Web App on Azure Cloud.
+### This Ansible role creates all Azure components and services needed to deploy a High Available Web Application.
 
-All components are implemented with focus on provide security and high availibility for the proposed architecture.
+<br/><br/>
+### Azure Load Balance and Availability Set for VM HA.
+
+Azure VMs are placed into a Availability-Set to provide High Availability.
+
+An Azure Standard Load Balancer is also placed in front of Azure VMs to improve the Availability and Resiliency of the Application.
+
 
 The architecture approach is "cost-effective".
 
