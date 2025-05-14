@@ -21,7 +21,7 @@ How to Use This Solution
 
 
 <p align="center">
-<img height="400" src="./pictures/azure_web_application_architecture.png">
+<img height="600" src="./pictures/azure_web_application_architecture.png">
 </p>
 
 ## Requirements
