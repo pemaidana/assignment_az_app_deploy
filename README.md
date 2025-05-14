@@ -170,7 +170,7 @@ availability-set:
 
 - Azure subscription.
 - Ansible implementation is required.
-- [Configure Ansible integration with Azure Cloud](azure_reqs.md)
+- [Configure Azure Service Principal and install needed packages](azure_reqs.md)
 
 
 ## Creating a Project and Job Template to Run the playbook:
