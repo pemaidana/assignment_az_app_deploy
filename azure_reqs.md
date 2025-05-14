@@ -2,10 +2,11 @@
 
 ## Python libraries
 
-As we will interact with Azure, we need a couple of Python libraries to be present in the system.
+To interact with Azure, we need a couple of Python libraries to be present in the system.
 
 ```bash
-pip install --user -r requirements_azure.txt
+pip3 install ansible[azure] --user
+pip3 install msrestazure
 ```
 
 ## Ansible Collections
@@ -17,20 +18,40 @@ ansible-galaxy collection install -r collections/requirements.yml
 ```
 
 ## Azure credentials
-
-To authenticate via service principal, provide these variables; `subscription_id`, `client_id`, `secret` and `tenant` or set them as environment variables;`AZURE_SUBSCRIPTION_ID`, `AZURE_CLIENT_ID`, `AZURE_SECRET` and `AZURE_TENANT`.
+ 
+Please provide these variables; `subscription_id`, `client_id`, `secret` and `tenant` for the next steps.
 
 - `AZURE_SUBSCRIPTION_ID`: [Find your Azure subscription](https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to?tabs=portal)
 - `AZURE_CLIENT_ID` and `AZURE_TENANT`: [Register an application with Azure AD and create a service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#register-an-application-with-azure-ad-and-create-a-service-principal)
 - `AZURE_SECRET`: [Create a new application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)
 
-### Register application on Azure
+### Create an Azure service principal
 
-<p align="center">
-<img src="./static/azure_app.png">
-</p>
+An Azure service principal gives you a dedicated account to manage Azure resources with Ansible.
 
-### Create an application secret on Azure
+Run the following code to create an Azure service principal using Azure CLI:
+
+```bash
+az ad sp create-for-rbac --name ansible \
+            --role Contributor \
+            --scopes /subscriptions/<subscription_id>
+```
+
+>[!NOTE]
+>Store the password from the output in a secure location.
+
+
+### Assign a role to the Azure service principal
+
+By default service principals don't have the access necessary to manage resources in Azure.
+
+Run the following command to assign the **Contributor** role to the service principal:
+
+```bash
+az role assignment create --assignee <appID> \
+    --role Contributor \
+    --scope /subscriptions/<subscription_id>
+```
 
 <p align="center">
 <img src="./static/azure_app_secret.png">
