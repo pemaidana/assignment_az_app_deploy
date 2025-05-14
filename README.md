@@ -20,7 +20,7 @@
 
    
 <p align="center">
-<img height="600" src="./pictures/manual_process.jpg">
+<img height="400" src="./pictures/manual_process.jpg">
 </p>
 
 
