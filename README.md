@@ -16,7 +16,7 @@ How to Use This Solution
 
 2. Standardize a procedure, less error-prone implementations.
 
-3. Provide on-demand consumption model for Azure Cloud Web App implementations (integration between Ansible and ServiceNow is required).
+3. Provide building-block for Service Catalog consumption model (Ansible integration with ServiceNow required).
 
 
 <p align="center">
