@@ -49,7 +49,7 @@
         admin_password: "{{ admin_password }}"
         availability_set: "{{ av_set }}"
         network_interfaces: "vm-01-nic"
-        custom_data: "{{ lookup('file', '/tmp/cloud-init.yaml') }}"
+        custom_data: "{{ lookup('file', 'cloud-init.txt') }}"
         #custom_data: "{{ ansible_env.HOME }}/cloud-init.yaml"
         image:
           offer: ubuntu-24_04-lts
@@ -72,7 +72,7 @@
         admin_password: "{{ admin_password }}"
         availability_set: "{{ av_set }}"
         network_interfaces: "vm-02-nic"
-        custom_data: "{{ lookup('file', '/tmp/cloud-init.yaml') }}"
+        custom_data: "{{ lookup('file', 'cloud-init.txt') }}"
         image:
           offer: ubuntu-24_04-lts
           publisher: Canonical
