@@ -20,7 +20,7 @@
   ansible.builtin.include_tasks: az_bastion_create.yml
 
 - name: Create cloud-init VM configuration file
-  ansible.builtin.include_tasks: prepate_app_config.yml
+  ansible.builtin.include_tasks: prepare_app_config.yml
 
 - name: Create VMs - Configure NICs - Implement VM config
   ansible.builtin.include_tasks: az_vm_create.yml
