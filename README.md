@@ -71,7 +71,13 @@ Leverages API integration between Ansible and ServiceNow.
 ## Solution Overview
 
 ### This Ansible role creates all Azure components and services needed to deploy a High Available Web Application.
+<br/><br/>
+Below is the architecture diagram generated with: https://github.com/mingrammer/diagrams
+<br/><br/>
 
+<p align="center">
+<img height="800" src="./pictures/azure_web_application_architecture.png">
+</p>
 <br/><br/>
 ### VMs High Availability: Azure Load Balancer and Availability Set
 
@@ -150,12 +156,7 @@ availability-set:
 ```
 
 
-Below is the architecture diagram generated with: https://github.com/mingrammer/diagrams
-<br/><br/>
 
-<p align="center">
-<img height="800" src="./pictures/azure_web_application_architecture.png">
-</p>
 
 ## Requirements
 
