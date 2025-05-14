@@ -10,7 +10,7 @@ How to Use This Solution
 # Highly available Azure Web App Deployment with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
-## Goal
+## Automation Solution Goal
 
 1. Reduce efforts needed from Cloud Engineering team for Azure Cloud implementations.
 
@@ -19,6 +19,15 @@ How to Use This Solution
 3. Provide building-block for Service Catalog consumption model (Ansible integration with ServiceNow required).
 
 
+## Problem Statement
+
+Cloud Engineers receive several requests to deploy Azure Cloud infrastructure for several internal teams.
+Tasks are repetitive and error-prone due to manual steps required.
+
+
+## Solution Overview
+
+This Ansible automation asset will connect to Azure Cloud to deploy and configure all components of the proposed architecture.
 
 <p align="center">
 <img height="600" src="./pictures/azure_web_application_architecture.png">
