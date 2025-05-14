@@ -10,9 +10,15 @@ How to Use This Solution
 # Highly available Azure Web App Deployment with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
-The goal is to perform the deployment of a Web Application running on a Docker container, hosted in a High Availability environment, by just running a simple Ansible playbook.
-This solution aims the Cloud Engineer to save time when he needs to provision Web App setup, quick and in a secure manner.
+## Goal
 
+Provide benefits listed below:
+
+1. Reduce efforts needed from Cloud Engineering team for Azure Cloud implementations.
+
+2. Standardized procedure, less error-prone implementations.
+
+3. Provide on-demand consumption model for Azure Cloud implementations (integration between Ansible and ServiceNow is required).
 
 
 <p align="center">
