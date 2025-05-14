@@ -27,6 +27,8 @@ This Ansible automation asset will connect to Azure Cloud to deploy and configur
 
 ## Requirements
 
+- Azure subscription.
+- Ansible implementation is required.
 - [Configure Ansible integration with Azure Cloud](azure_reqs.md)
 
 
