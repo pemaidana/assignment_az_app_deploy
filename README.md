@@ -27,9 +27,7 @@ Provide benefits listed below:
 
 ## Requirements
 
-- [AWS](aws.md)
-- [Azure](azure.md)
-- [GCP](gcp.md)
+- [Azure](azure_reqs.md)
 
 
 ## Creating a Job Template to Deploy the Web Server(s)
