@@ -185,7 +185,7 @@ Below is the architecture diagram generated with: https://github.com/mingrammer/
 <br/><br/>
 
 <p align="center">
-<img height="800" src="./pictures/azure_web_application_architecture.png">
+<img height="800" src="./pictures/azure_environment_with_firewall.png">
 </p>
 
 
