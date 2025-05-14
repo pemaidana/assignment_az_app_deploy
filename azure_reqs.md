@@ -17,7 +17,7 @@ We will also need the Ansible [collection for Azure](https://github.com/ansible-
 ansible-galaxy collection install -r collections/requirements.yml
 ```
 
-## Azure credentials
+### Azure credentials
  
 Please provide these variables; `subscription_id`, `client_id`, `secret` and `tenant` for the next steps.
 
@@ -53,38 +53,73 @@ az role assignment create --assignee <appID> \
     --scope /subscriptions/<subscription_id>
 ```
 
-<p align="center">
-<img src="./static/azure_app_secret.png">
-</p>
+## Get Azure service principal information
 
-### Grant the application access to a resource on Azure 
+To authenticate to Azure with a service principal, you need the following information:
 
-<p align="center">
-<img src="./static/azure_app_grant1.png">
-</p>
+* SubscriptionID
+* Service Principal ApplicationId
+* Service Principal password
+* TenantID
 
+Run the following commands to get the service principal information:
 
-### Grant the application access to a resource on Azure - Assign roles
+```bash
+az account show --query '{tenantId:tenantId,subscriptionid:id}';
 
-<p align="center">
-<img src="./static/azure_app_grant2.png">
-</p>
-
-
-### Grant the application access to a resource on Azure - Assign members
-
-<p align="center">
-<img src="./static/azure_app_grant2.png">
-</p>
-
-## SSH Public key
-
-You need to provide an SSH Key pair, so Azure can add the public SSH Key to `~/.ssh/authorized_keys` in the instances it creates. Ansible uses the Private Key to configure these instances after they are created.
-
-```yaml
-ssh_pubkey: 'ssh-rsa AAAAB3NzaC1y.....'
+az ad sp list --display-name ansible --query '{clientId:[0].appId}'
 ```
 
-<p align="center">
-<img src="./pictures/tower_SSH_Key.png">
-</p>
+## Test service principal permissions
+
+Run the following command to create a new Azure resource group:
+
+```bash
+ansible localhost -m azure_rm_resourcegroup -a "name=<resource_group_name> location=<resource_group_location>"
+```
+
+Replace `<resource_group_name>` and `<resource_group_location>` with your new resource group values.
+
+```Output
+[WARNING]: No inventory was parsed, only implicit localhost is available
+localhost | CHANGED => {
+    "changed": true,
+    "contains_resources": false,
+    "state": {
+        "id": "/subscriptions/<subscriptionID>/resourceGroups/azcli-test",
+        "location": "eastus",
+        "name": "azcli-test",
+        "provisioning_state": "Succeeded",
+        "tags": null
+    }
+}
+```
+
+Run the following command to delete the Azure resource group:
+
+```bash
+ansible localhost -m azure_rm_resourcegroup -a "name=<resource_group_name> state=absent force_delete_nonempty=yes"
+```
+
+Replace `<resource_group_name>` with the name of your resource group.
+
+```Output
+[WARNING]: No inventory was parsed, only implicit localhost is available
+localhost | CHANGED => {
+    "changed": true,
+    "contains_resources": false,
+    "state": {
+        "id": "/subscriptions/subscriptionID>/resourceGroups/azcli-test",
+        "location": "eastus",
+        "name": "azcli-test",
+        "provisioning_state": "Succeeded",
+        "status": "Deleted",
+        "tags": null
+    }
+}
+
+```
+
+## Next steps:
+
+Use Ansible playbook for managing Azure environments.
