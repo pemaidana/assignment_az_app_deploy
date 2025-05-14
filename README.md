@@ -3,7 +3,7 @@
 
 ## Automation Solution Goal
 
-1. Reduce (or even avoid) efforts required from Cloud Engineering team for Azure Cloud implementations.
+1. Reduce (or even avoid) efforts required from Cloud Engineering team to deploy Azure Cloud Web Apps.
 
 2. Standardize a procedure, less error-prone implementations.
 
