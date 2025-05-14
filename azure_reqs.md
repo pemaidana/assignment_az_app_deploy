@@ -17,6 +17,7 @@ We will also need the Ansible [collection for Azure](https://github.com/ansible-
 ansible-galaxy collection install -r collections/requirements.yml
 ```
 
+
 ### Azure credentials
  
 Please provide these variables; `subscription_id`, `client_id`, `secret` and `tenant` for the next steps.
@@ -24,6 +25,7 @@ Please provide these variables; `subscription_id`, `client_id`, `secret` and `te
 - `AZURE_SUBSCRIPTION_ID`: [Find your Azure subscription](https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to?tabs=portal)
 - `AZURE_CLIENT_ID` and `AZURE_TENANT`: [Configure Azure CLI on Linux VM and get the values](https://learn.microsoft.com/en-us/cli/azure/get-started-with-azure-cli?view=azure-cli-latest)
 - `AZURE_SECRET`: [Create a new application secret, will be retrieved on next steps of this guide](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)
+
 
 ### Create an Azure service principal
 
@@ -41,6 +43,7 @@ az ad sp create-for-rbac --name ansible \
 >Store the password from the output in a secure location.
 
 
+
 ### Assign a role to the Azure service principal
 
 By default service principals don't have the access necessary to manage resources in Azure.
@@ -52,6 +55,7 @@ az role assignment create --assignee <appID> \
     --role Contributor \
     --scope /subscriptions/<subscription_id>
 ```
+
 
 ## Get Azure service principal information
 
@@ -69,6 +73,7 @@ az account show --query '{tenantId:tenantId,subscriptionid:id}';
 
 az ad sp list --display-name ansible --query '{clientId:[0].appId}'
 ```
+
 
 ## Test service principal permissions
 
@@ -119,6 +124,7 @@ localhost | CHANGED => {
 }
 
 ```
+
 
 ## Next steps:
 
