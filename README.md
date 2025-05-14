@@ -1,4 +1,4 @@
-# Highly available Azure Web App Deployment with Ansible
+# High Available Azure Web App Deployment with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
 ## Automation Solution Goal
