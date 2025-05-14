@@ -211,7 +211,7 @@ Follow these steps to provision the Web Server(s).
 5. It should look like this when it finishes, useful information about VMs created:
 
 <p align="center">
-<img src="./pictures/job_results.png">
+<img src="./pictures/job_results.jpg">
 </p>
 
 
