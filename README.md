@@ -183,33 +183,35 @@ Follow these steps to provision the Web Server(s).
 <img src="./pictures/aap_project.jpg">
 </p>
 
-
+<br/><br/>
 2. Create a Job Template pointing to [az_webapp_deploy.yml](az_webapp_deploy.yml).
 
 <p align="center">
 <img src="./pictures/aap_jobtemplate.jpg">
 </p>
 
-5. Run the Job Template.
+<br/><br/>
+3. Add few parameters needed:
+
+- In case needed, JumpHost FQDN.
+- Project Name: `az-prefix` (it will be used to name the componentes created in Azure Cloud.
+- Azure Subscription id: `subscription_id`
 
 <p align="center">
-<img src="./pictures/tower_create_run.png">
+<img src="./pictures/extravars.jpg">
 </p>
 
-It should look like this when it finishes:
+<br/><br/>
+4. Run the Job Template.
 
 <p align="center">
-<img src="./pictures/tower_create.png">
+<img src="./pictures/job_execution.jpg">
+</p>
+
+5. It should look like this when it finishes, useful information about VMs created:
+
+<p align="center">
+<img src="./pictures/job_results.png">
 </p>
 
 
-
-How to Use This Solution
-1.	Clone the Repository: Clone the GitHub repository once set up.
-2.	Configure Parameters: Update the vars/main.yml file with your specific settings (SSH keys, IP addresses, etc.).
-3.	Run the Playbook: Execute the Ansible playbook to deploy the entire infrastructure.
-4.	Access the Application: Access the application via HTTPS through the load balancer's public IP or DNS name.
-
-## Next steps
-
-* [Configure Linux virtual machines in Azure using Ansible](./vm-configure.md)
