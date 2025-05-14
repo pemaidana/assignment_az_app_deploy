@@ -88,3 +88,9 @@
       ansible.builtin.set_fact:
         exec_rc: 0
         exec_message: “cloud-init configuration for VMs was prepared with success”
+        
+  rescue:
+    - name: Issue while running commands
+      ansible.builtin.set_fact:
+        exec_rc: 2
+        exec_message: “An issue occurred while creating the cloud-init configuration file”
