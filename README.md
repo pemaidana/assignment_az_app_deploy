@@ -74,8 +74,9 @@ All components are implemented with focus on provide security and high availibil
 
 The architecture approach is "cost-effective".
 
-### Solution components and properties:
 <br/><br/>
+### Solution components and properties:
+
 
 ```yaml
 resource-group:
