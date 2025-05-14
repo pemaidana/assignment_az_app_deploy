@@ -21,7 +21,9 @@ Tasks are repetitive and error-prone due to manual steps required.
 
 ## Solution Overview
 
-This Ansible solution automates the deployment and configuration of Web App required components with focus on providing cost-effective and ensure security and high availibility for the proposed architecture.
+This Ansible solution automates the deployment and configuration of Web App on Azure Cloud.
+All components are implemented with focus on provide security and high availibility for the proposed architecture.
+The architecture approach is "cost-effective".
 
 <p align="center">
 <img height="800" src="./pictures/azure_web_application_architecture.png">
