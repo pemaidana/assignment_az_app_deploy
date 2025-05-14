@@ -15,7 +15,7 @@
 <img height="400" src="./pictures/manual_process.jpg">
 </p>
 
-
+<br/><br/>
 
 ## Automation Solution Benefits
 
@@ -37,7 +37,7 @@
 </p>
 
 
-<br/><br/>
+
 ### 2. Use ChatOps for simplifying the usage of Automation
 <br/><br/>
  
@@ -46,7 +46,7 @@
 </p>
 
 
-<br/><br/>
+
 ### 3. Fully Automated using ServiceNow Service Catalog:
 <br/><br/>
  
@@ -57,7 +57,7 @@
 ### This asset is focused on the Option 1, Ansible automation only.
 
 <br/><br/>
-<br/><br/>
+
 ## Solution Overview
 
 This Ansible solution automates the deployment and configuration of Web App on Azure Cloud.
