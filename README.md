@@ -48,6 +48,10 @@
 
 <br/><br/>
 ### 3. Fully Automated using ServiceNow Service Catalog:
+Recommended approach.
+Free-up Cloud Team resources.
+Improved User Experience.
+Requires integration between Ansible and ServiceNows
 <br/><br/>
  
 <p align="center">
