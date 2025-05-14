@@ -183,24 +183,11 @@ Follow these steps to provision the Web Server(s).
 <img src="./pictures/aap_project.jpg">
 </p>
 
-2. Create a [Microsoft Azure Resource Manager](https://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#microsoft-azure-resource-manager) credential with your [Azure service principal parameters](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
+
+2. Create a Job Template pointing to [az_webapp_deploy.yml](az_webapp_deploy.yml).
 
 <p align="center">
-<img src="./pictures/tower_Azure_cred.png">
-</p>
-
-3. The number and operating system of the backend servers are defined via the variable `vms`. Its default value is defined in the [vms file](vars/vms.yml). It lists 2 instances; one running `centos`, and the other one `ubuntu` (these are the two distributions supported at the moment). You can override this with a new `vms` definition as an [Extra Variable](https://docs.ansible.com/ansible-tower/latest/html/userguide/job_templates.html#extra-variables).
-
-```yaml
-vms:
-  1: centos
-  2: ubuntu
-```
-
-4. Put all these pieces together in a Job Template pointing to [main.yml](main.yml).
-
-<p align="center">
-<img src="./pictures/tower_create_job.png">
+<img src="./pictures/aap_jobtemplate.png">
 </p>
 
 5. Run the Job Template.
