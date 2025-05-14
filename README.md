@@ -1,4 +1,4 @@
-# Azur Cloud Network Infrastructure and Stateless Application Deployment automated with Ansible
+# Azure Cloud Network Infrastructure and Stateless Application Deployment automated with Ansible
 
 How to Use This Solution
 1.	Clone the Repository: Clone the GitHub repository once set up.
