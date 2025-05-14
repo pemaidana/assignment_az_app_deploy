@@ -5,7 +5,7 @@
 
 1. Reduce (or even avoid) efforts required from Cloud Engineering team to deploy Azure Cloud Web Apps.
 
-2. Standardize a procedure, avoid error-prone implementations.
+2. Standardize an automated procedure, avoid error-prone implementations.
 
 3. Provide building-block for Service Catalog consumption model (Ansible integration with ServiceNow required).
 
