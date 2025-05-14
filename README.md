@@ -16,7 +16,7 @@ This solution aims the Cloud Engineer to save time when he needs to provision We
 
 
 <p align="center">
-<img height="400" src="./pictures/webserver.svg">
+<img height="400" src="./pictures/azure_web_application_architecture.png">
 </p>
 
 ## Requirements
