@@ -208,6 +208,7 @@ Follow these steps to provision the Web Server(s).
 <img src="./pictures/job_execution.jpg">
 </p>
 
+<br/><br/>
 5. It should look like this when it finishes, useful information about VMs created:
 
 <p align="center">
