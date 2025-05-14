@@ -1,48 +1,48 @@
 ---
 - name: Create and configure Azure Load Balancer
-  hosts: localhost
-  connection: local
-  tasks:
+  delegate_to: "{{ jump_host }}"
+  block:
 
-  - name: Create public IP for Load Balancer
-    azure.azcollection.azure_rm_publicipaddress:
-      resource_group: "{{ resource_group }}"
-      name: "{{ lb_pip_name }}"
-      allocation_method: Static
-      sku: Standard
-      location: "{{ location }}"
-    register: public_ip
-      
-  - name: Create Load Balancer
-    azure.azcollection.azure_rm_loadbalancer:
-      resource_group: "{{ resource_group }}"
-      name: "{{ lb_name }}"
-      location: "{{ location }}"
-      sku: Standard
-      frontend_ip_configurations:
-        - name: "frontend-config"
-          public_ip_address: "{{ lb_pip_name }}"
-      backend_address_pools:
-        - name: "backend-pool"
-      probes:
-        - name: "https-probe"
-          protocol: Tcp
-          port: 443
-          interval: 5
-          fail_count: 2
-      load_balancing_rules:
-        - name: "https-rule"
-          frontend_ip_configuration: "frontend-config"
-          backend_address_pool: "backend-pool"
-          protocol: Tcp
-          frontend_port: 443
-          backend_port: 443
-          idle_timeout: 4
-          probe: "https-probe"
-          load_distribution: Default
-    register: load_balancer
+    - name: Create public IP for Load Balancer
+      azure.azcollection.azure_rm_publicipaddress:
+        resource_group: "{{ resource_group }}"
+        name: "{{ lb_pip_name }}"
+        allocation_method: Static
+        sku: Standard
+        location: "{{ location }}"
+      register: public_ip
+        
+    - name: Create Load Balancer
+      azure.azcollection.azure_rm_loadbalancer:
+        resource_group: "{{ resource_group }}"
+        name: "{{ lb_name }}"
+        location: "{{ location }}"
+        sku: Standard
+        frontend_ip_configurations:
+          - name: "frontend-config"
+            public_ip_address: "{{ lb_pip_name }}"
+        backend_address_pools:
+          - name: "backend-pool"
+        probes:
+          - name: "https-probe"
+            protocol: Tcp
+            port: 443
+            interval: 5
+            fail_count: 2
+        load_balancing_rules:
+          - name: "https-rule"
+            frontend_ip_configuration: "frontend-config"
+            backend_address_pool: "backend-pool"
+            protocol: Tcp
+            frontend_port: 443
+            backend_port: 443
+            idle_timeout: 4
+            probe: "https-probe"
+            load_distribution: Default
+      register: load_balancer
  
-  - name: Successful Object creation
-    ansible.builtin.set_fact:
-      exec_rc: 0
-      exec_message: “Azure Load Balancer and its components were configured with success”
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “Azure Load Balancer and its components were configured with success”
+        
