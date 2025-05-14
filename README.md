@@ -19,6 +19,7 @@ How to Use This Solution
 3. Provide building-block for Service Catalog consumption model (Ansible integration with ServiceNow required).
 
 
+
 <p align="center">
 <img height="400" src="./pictures/azure_web_application_architecture.png">
 </p>
