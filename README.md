@@ -73,7 +73,7 @@ Leverages API integration between Ansible and ServiceNow.
 ### This Ansible role creates all Azure components and services needed to deploy a High Available Web Application.
 
 <br/><br/>
-### VMs High Availability: Azure Load Balancer and Availability
+### VMs High Availability: Azure Load Balancer and Availability Set
 
 Azure VMs are placed into a Availability-Set to provide High Availability.
 
