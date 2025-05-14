@@ -51,9 +51,9 @@
 
 Free-up Cloud Team resources.
 
-Improved User Experience.
+Improves the User Experience.
 
-Requires integration between Ansible and ServiceNows
+Leverages API integration between Ansible and ServiceNow.
 <br/><br/>
  
 <p align="center">
