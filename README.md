@@ -136,6 +136,10 @@ This provide high level security to unwanted management access to Azure VMs.
 <img height="400" src="./pictures/bastion.jpg">
 </p>
 
+<p align="center">
+<img height="400" src="./pictures/bastion2.jpg">
+</p>
+
 <br/><br/>
 
 <br/><br/>
