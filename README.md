@@ -22,7 +22,7 @@ Tasks are repetitive and error-prone due to manual steps required.
 This Ansible automation asset will connect to Azure Cloud to deploy and configure all components of the proposed architecture.
 
 <p align="center">
-<img height="600" src="./pictures/azure_web_application_architecture.png">
+<img height="800" src="./pictures/azure_web_application_architecture.png">
 </p>
 
 ## Requirements
