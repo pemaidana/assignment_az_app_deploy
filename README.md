@@ -110,6 +110,10 @@ Azure Load Balancer has a Public IP to receive connection from clients on the In
 <br/><br/>
 
 <p align="center">
+<img height="400" src="./pictures/vnet.jpg">
+</p>
+
+<p align="center">
 <img height="400" src="./pictures/nsg1.jpg">
 </p>
 
@@ -140,6 +144,22 @@ This provide high level security to unwanted management access to Azure VMs.
 Azure VMs are deployed with SSL configuration and internal firewall-rule to allow incoming connection to Web App on TCP-443 port.
 
 Azure Load Balance rule are applied to allow only TCP-443 traffic from External sources to App VMs.
+
+<br/><br/>
+
+<p align="center">
+<img height="400" src="./pictures/vm1.jpg">
+</p>
+
+<p align="center">
+<img height="400" src="./pictures/vm2.jpg">
+</p>
+
+<p align="center">
+<img height="400" src="./pictures/lbrules.jpg">
+</p>
+
+<br/><br/>
 
 <br/><br/>
 ### Application: NGINX and Docker.
