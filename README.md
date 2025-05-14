@@ -74,6 +74,21 @@ All components are implemented with focus on provide security and high availibil
 
 The architecture approach is "cost-effective".
 
+### Solution components and properties:
+<br/><br/>
+
+```yaml
+vnet:
+subnets:
+  1: backend
+  2: frontend
+  3: AzureBastionSubnet
+vms:
+  1: ubuntu 24.04 LTS
+  2: ubuntu 24.04 LTS
+```
+
+
 Below is the architecture diagram generated with: https://github.com/mingrammer/diagrams
 <br/><br/>
 
