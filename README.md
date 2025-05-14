@@ -18,6 +18,11 @@
 
 3. Tasks are repetitive and error-prone due to manual steps required.
 
+   
+<p align="center">
+<img height="600" src="./pictures/manual_process.jpg">
+</p>
+
 
 ## Solution Overview
 
