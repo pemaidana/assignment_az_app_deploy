@@ -165,6 +165,52 @@ availability-set:
 
 <br/><br/>
 
+
+
+# Security Architecture Options to secure Web Application
+
+### Add an Azure Firewall existing setup: increased and cost-effective protection.
+Benefits:
+
+- Cost-effective compared to App Gateway
+- Layer 4 load balancing
+- Robust security with Azure Firewall
+- Simple to maintain
+
+<br/><br/>
+
+Below is the architecture diagram generated with: https://github.com/mingrammer/diagrams
+
+<br/><br/>
+
+<p align="center">
+<img height="800" src="./pictures/azure_web_application_architecture.png">
+</p>
+
+
+<br/><br/>
+### Application Gateway with WAF in fron of existing setup: best option for Web traffic protection. 
+Benefits:
+
+- WAF provides protection against OWASP Top 10 vulnerabilities
+- Layer 7 traffic inspection and filtering
+- SSL/TLS termination at the gateway
+- Health probes and automatic failover
+- DDoS protection
+
+<br/><br/>
+
+Below is the architecture diagram generated with: https://github.com/mingrammer/diagrams
+
+<br/><br/>
+
+<p align="center">
+<img height="800" src="./pictures/azure_web_application_architecture.png">
+</p>
+
+<br/><br/>
+
+
 # How to consume this Ansible Automation?
 ## Pre-Reqs:
 
