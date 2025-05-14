@@ -1,7 +1,6 @@
 ---
 - name: Azure Web App provision Role
   hosts: localhost
-  connection: local
   gather_facts: false
   tasks:
     - name: Calling Azure Web App provision Role
