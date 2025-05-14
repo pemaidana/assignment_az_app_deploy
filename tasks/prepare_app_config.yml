@@ -5,7 +5,7 @@
 
     - name: Create cloud-init configuration
       copy:
-        dest: "/tmp/cloud-init.yaml"
+        dest: "cloud-init.txt"
         content: |
           #cloud-config
           package_upgrade: true
