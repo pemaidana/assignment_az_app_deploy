@@ -79,6 +79,7 @@ Below is the architecture diagram generated with: https://github.com/mingrammer/
 <img height="800" src="./pictures/azure_web_application_architecture.png">
 </p>
 <br/><br/>
+
 ### VMs High Availability: Azure Load Balancer and Availability Set
 
 Azure VMs are placed into a Availability-Set to provide High Availability.
