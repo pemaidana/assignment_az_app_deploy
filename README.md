@@ -1,7 +1,7 @@
 # High Available Azure Web App Deployment with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
-### This repo contains the code to implement an Ansible role to deploy a Web Application on Azure Cloud.
+### This repo contains an Ansible role that automates the deployment of a Web Application on Azure Cloud.
 <br/><br/>
 
 ## Problem Statement
