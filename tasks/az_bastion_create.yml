@@ -1,10 +1,7 @@
 ---
 - name: Create Azure Bastion and related resources
-  hosts: localhost
-  connection: local
-  gather_facts: no
-  tasks:
-
+  delegate_to: "{{ jump_host }}"
+  block:
     - name: Create public IP for Bastion
       azure.azcollection.azure_rm_publicipaddress:
         resource_group: "{{ resource_group }}"
@@ -27,3 +24,8 @@
             public_ip_address:
               id: "/subscriptions/{{ subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/publicIPAddresses/{{ bastion_vm_name }}-PIP"
             private_ip_allocation_method: Dynamic
+
+    - name: Successful Object creation
+      ansible.builtin.set_fact:
+        exec_rc: 0
+        exec_message: “Azure Bastion service and Bastion PIP created with success”
