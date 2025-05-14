@@ -87,6 +87,16 @@ Azure VMs are placed into a Availability-Set to provide High Availability.
 Azure Standard Load Balancer is also placed in front of Azure VMs.
 
 <br/><br/>
+
+<p align="center">
+<img height="400" src="./pictures/av.jpg">
+</p>
+
+<p align="center">
+<img height="400" src="./pictures/lb.jpg">
+</p>
+
+<br/><br/>
 ### Network Security: Subnets, Network Security Groups, Network Rules.
 
 Azure VMs are placed in a specific BackEnd Subnet that is protected by a Network Security Group.
