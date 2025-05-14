@@ -12,7 +12,9 @@
 
 ## Problem Statement
 
-Cloud Engineers receive several requests to deploy Azure Cloud infrastructure for several internal teams.
+Cloud Engineers receive several requests to deploy Azure Cloud infrastructure.
+
+Requests are often delayed due to Cloud Engineer need to focus on troubleshooting and also implementing projects.
 
 Tasks are repetitive and error-prone due to manual steps required.
 
