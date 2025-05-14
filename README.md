@@ -8,7 +8,7 @@
 
 2. Requests often take days to be completed due to Cloud Team is busy troubleshooting issues and implementing other projects.
 
-3. Tasks are repetitive and error-prone due to manual steps required.
+3. Deployment tasks are repetitive and error-prone due to manual steps required.
 
    
 <p align="center">
