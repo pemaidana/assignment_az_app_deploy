@@ -1,6 +1,8 @@
 # High Available Azure Web App Deployment with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
+# This repo contains the code to implement an Ansible role to deploy a Web Application on Azure Cloud.
+<br/><br/>
 
 ## Problem Statement
 
@@ -17,7 +19,7 @@
 
 <br/><br/>
 
-## Automation Solution Benefits
+## Benefits of this Automation Solution
 
 1. Reduce (or even avoid) efforts required from Cloud Engineering team to deploy Azure Cloud infrastructure.
 
